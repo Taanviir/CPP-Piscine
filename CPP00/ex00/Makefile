@@ -12,7 +12,7 @@ all : $(NAME)
 
 $(NAME) :
 	@c++ $(CPPFLAGS) $(SRC) -o $(NAME)
-	@echo $(GREEN_B)"Megaphone\033[0m is ready. ✅\n"$(RESET)
+	@echo $(GREEN_B)"Megaphone\033[0m is ready. ✅"$(RESET)
 
 clean :
 	@rm -f $(NAME)
