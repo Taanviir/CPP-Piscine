@@ -1,16 +1,11 @@
 #include "PhoneBook.hpp"
 
-/*
-* things to fix:
-* index of contacts need to be handled properly
-*/
-
 int main(void)
 {
 	PhoneBook phonebook;
 	std::string command;
 
-	while (42)
+	while (true)
 	{
 		std::cout << std::endl << "Enter a command (ADD, SEARCH, EXIT): ";
 		if (std::getline(std::cin, command)) {
@@ -24,6 +19,10 @@ int main(void)
 			else
 				std::cout << "Invalid command" << std::endl;
 		} else {
+			if (std::cin.eof()) {
+				std::cout << std::endl << "EOF received, quitting program." << std::endl;
+				return 1;
+			}
 			std::cout << "Invalid input" << std::endl;
 			break;
 		};

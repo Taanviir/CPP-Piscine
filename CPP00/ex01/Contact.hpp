@@ -11,11 +11,11 @@ public:
 	~Contact(void) {};
 
 	// getters for private members
-	std::string getFirstName(void) {return this->_firstName;};
-	std::string getLastName(void) {return this->_lastName;};
-	std::string getNickName(void) {return this->_nickname;};
-	std::string getPhoneNumber(void) {return this->_phoneNumber;};
-	std::string getDarkestSecret(void) {return this->_darkestSecret;};
+	std::string getFirstName(void) const {return _firstName;};
+	std::string getLastName(void) const {return _lastName;};
+	std::string getNickname(void) const {return _nickname;};
+	std::string getPhoneNumber(void) const {return _phoneNumber;};
+	std::string getDarkestSecret(void) const {return _darkestSecret;};
 
 	// setters for private members
 	void setFirstName(std::string newFirstName) {_firstName = newFirstName;};
