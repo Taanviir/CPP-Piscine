@@ -1,11 +1,12 @@
-#ifndef CONTACT_HPP
-# define CONTACT_HPP
+#ifndef __CONTACT_H__
+# define __CONTACT_H__
 
 # include <iostream>
 # include <string>
 # include <iomanip>
 
 class Contact {
+
 public:
 	Contact(void) {};
 	~Contact(void) {};
@@ -30,6 +31,7 @@ private:
 	std::string _nickname;
 	std::string _phoneNumber;
 	std::string _darkestSecret;
+
 };
 
 #endif

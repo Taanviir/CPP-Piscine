@@ -1,9 +1,10 @@
-#ifndef PHONEBOOK_H
-# define PHONEBOOK_H
+#ifndef __PHONEBOOK_H__
+# define __PHONEBOOK_H__
 
 # include "Contact.hpp"
 
 class PhoneBook {
+
 public:
 	PhoneBook(void);
 	~PhoneBook(void);
@@ -11,12 +12,13 @@ public:
 	void addContact(void);
 	void searchContact(void);
 
-	Contact getContact(int index) const {return _contacts[index];};
-	void setContact(Contact contact) {_contacts[_contactCount % 8] = contact;};
+	Contact getContact(int index) const {return this->_contacts[index];};
+	void setContact(Contact contact) {this->_contacts[this->_contactCount % 8] = contact;};
 
 private:
 	Contact _contacts[8];
-	int _contactCount; // set on the latest index
+	int _contactCount;
+
 };
 
 #endif
