@@ -101,12 +101,12 @@ void PhoneBook::searchContact(void) {
 			break;
 		}
 		if (!input.empty() && input.size() == 1 && input >= "1" && input <= "8") {
-			if (std::stoi(input) > this->_contactCount) {
+			if (atoi(input.c_str()) > this->_contactCount) {
 				std::cout << "No contact exists in this index." << std::endl << std::endl;
 				continue;
 			}
 			std::cout << std::endl << "Retrieving information of contact " << input << std::endl;
-			printContactInfo(this->getContact(std::stoi(input) - 1));
+			printContactInfo(this->getContact(atoi(input.c_str()) - 1));
 			break;
 		}
 		else {
