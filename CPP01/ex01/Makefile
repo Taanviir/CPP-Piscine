@@ -20,7 +20,7 @@ $(NAME) : $(OBJS)
 	@c++ $(CPPFLAGS) $(OBJS) -o $@
 	@echo $(GREEN_B)"Zombie Horde\033[0m is ready. ✅\n"$(RESET)
 
-$(OBJ_DIR)%.o : %.cpp
+$(OBJ_DIR)%.o : %.cpp $(INCLUDES)
 	@mkdir -p $(OBJ_DIR)
 	@c++ $(CPPFLAGS) -c $< -o $@
 	@echo $(BLUE_I)"Compiling $<."$(RESET)
