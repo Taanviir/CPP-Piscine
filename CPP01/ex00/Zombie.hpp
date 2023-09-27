@@ -1,6 +1,5 @@
-#pragma once
-#ifndef __ZOMBIE_H__
-# define __ZOMBIE_H__
+#ifndef ZOMBIE_HPP
+# define ZOMBIE_HPP
 
 # include <string>
 # include <iostream>

@@ -1,5 +1,5 @@
-#ifndef __PHONEBOOK_H__
-# define __PHONEBOOK_H__
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
 
 # include "Contact.hpp"
 

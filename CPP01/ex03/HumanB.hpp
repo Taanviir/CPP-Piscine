@@ -1,21 +1,20 @@
-#pragma once
-#ifndef __HUMANB_HPP__
-#define __HUMANB_HPP__
+#ifndef HUMANB_HPP
+# define HUMANB_HPP
 
 # include "Weapon.hpp"
 
 class HumanB {
 
-private:
-	std::string _name;
-	Weapon _weapon;
-
 public:
 	HumanB(std::string name);
-	~HumanB(void);
+	~HumanB(void) {};
 
 	void attack(void);
-	void setWeapon(Weapon weapon);
+	void setWeapon(Weapon& weapon);
+
+private:
+	std::string _name;
+	Weapon* _weapon;
 
 };
 

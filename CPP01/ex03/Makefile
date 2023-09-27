@@ -7,7 +7,7 @@ RESET = "\033[0m"
 NAME = unnecessary_violence
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRCS = main.cpp Weapon.hpp Weapon.cpp HumanA.hpp HumanA.cpp HumanB.hpp HumanB.cpp
+SRCS = *.cpp
 
 OBJ_DIR = obj/
 OBJS_LIST = $(SRCS:.cpp=.o)
@@ -21,7 +21,7 @@ $(NAME) : $(OBJS)
 
 $(OBJ_DIR)%.o : %.cpp
 	@mkdir -p $(OBJ_DIR)
-	@c++ $(CPPFLAGS) -c $< -o $@
+	@c++ $(CPPFLAGS) -I./ -c $< -o $@
 	@echo $(BLUE_I)"Compiling $<."$(RESET)
 
 clean :
