@@ -20,11 +20,11 @@ static std::string getUserInfo(std::string message)
 				std::cout << std::endl << "EOF received, quitting program." << std::endl;
 				exit(1);
 			}
-			std::cout << "Invalid input" << std::endl << std::endl;
+			std::cerr << "Error: Invalid input" << std::endl << std::endl;
 			continue;
 		}
 		if (input.empty()) {
-			std::cout << "Invalid input" << std::endl << std::endl;
+			std::cerr << "Error: Invalid input" << std::endl << std::endl;
 			continue;
 		}
 		else
@@ -97,7 +97,7 @@ void PhoneBook::searchContact(void) {
 				std::cout << std::endl << "EOF received, quitting program." << std::endl;
 				exit(1);
 			}
-			std::cout << "Invalid input" << std::endl;
+			std::cerr << "Error: Invalid input" << std::endl;
 			break;
 		}
 		if (!input.empty() && input.size() == 1 && input >= "1" && input <= "8") {
@@ -110,7 +110,7 @@ void PhoneBook::searchContact(void) {
 			break;
 		}
 		else {
-			std::cout << "Invalid input" << std::endl << std::endl;
+			std::cerr << "Error: Invalid input" << std::endl << std::endl;
 			continue;
 		}
 	}

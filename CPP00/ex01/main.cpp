@@ -17,13 +17,13 @@ int main(void)
 			else if (command == "EXIT")
 				break;
 			else
-				std::cout << "Invalid command" << std::endl;
+				std::cerr << "Error: Invalid command" << std::endl;
 		} else {
 			if (std::cin.eof()) {
 				std::cout << std::endl << "EOF received, quitting program." << std::endl;
 				return 1;
 			}
-			std::cout << "Invalid input" << std::endl;
+			std::cerr << "Error: Invalid input" << std::endl;
 			break;
 		};
 	}
