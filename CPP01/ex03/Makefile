@@ -17,7 +17,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@c++ $(CPPFLAGS) $(OBJS) -o $@
-	@echo $(GREEN_B)"Unnecessary Violence\033[0m is ready. ✅\n"$(RESET)
+	@echo $(GREEN_B)"unnecessary_violence\033[0m is ready. ✅\n"$(RESET)
 
 $(OBJ_DIR)%.o : %.cpp
 	@mkdir -p $(OBJ_DIR)

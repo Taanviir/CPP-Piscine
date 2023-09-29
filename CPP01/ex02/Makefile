@@ -17,7 +17,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@c++ $(CPPFLAGS) $(OBJS) -o $@
-	@echo $(GREEN_B)"Brain\033[0m is ready. ✅\n"$(RESET)
+	@echo $(GREEN_B)"brain\033[0m is ready. ✅\n"$(RESET)
 
 $(OBJ_DIR)%.o : %.cpp
 	@mkdir -p $(OBJ_DIR)
