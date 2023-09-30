@@ -4,7 +4,7 @@ RED_B = "\033[1;31m"
 BLUE_I = "\033[2;34m"
 RESET = "\033[0m"
 
-NAME = fixedPointExample
+NAME = fixedBad
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRCS = main.cpp Fixed.cpp
@@ -17,7 +17,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@c++ $(CPPFLAGS) $(OBJS) -o $@
-	@echo $(GREEN_B)"fixedPointExample\033[0m is ready. ✅\n"$(RESET)
+	@echo $(GREEN_B)"fixedBad\033[0m is ready. ✅\n"$(RESET)
 
 $(OBJ_DIR)%.o : %.cpp
 	@mkdir -p $(OBJ_DIR)
