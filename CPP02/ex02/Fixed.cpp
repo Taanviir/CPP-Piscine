@@ -67,19 +67,23 @@ bool Fixed::operator!=(const Fixed& fixedValue) const {
 }
 
 Fixed Fixed::operator+(const Fixed& fixedValue) {
-	return (this->_fixedPointValue + fixedValue.getRawBits());
+	return (this->toFloat() + fixedValue.toFloat());
 }
 
 Fixed Fixed::operator-(const Fixed& fixedValue) {
-	return (this->_fixedPointValue - fixedValue.getRawBits());
+	return (this->toFloat() - fixedValue.toFloat());
 }
 
 Fixed Fixed::operator*(const Fixed& fixedValue) {
-	return (this->_fixedPointValue * fixedValue.getRawBits());
+	return (this->toFloat() * fixedValue.toFloat());
 }
 
 Fixed Fixed::operator/(const Fixed& fixedValue) {
-	return (this->_fixedPointValue / fixedValue.getRawBits());
+	if (fixedValue.getRawBits() == 0) {
+		std::cerr << "Error: Cannot divide by zero!" << std::endl;
+		return 0;
+	}
+	return (this->toFloat() / fixedValue.toFloat());
 }
 
 Fixed& Fixed::operator++(void) {
