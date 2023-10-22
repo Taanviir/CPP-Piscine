@@ -1,6 +1,6 @@
 #include "Zombie.hpp"
 
-Zombie::~Zombie(void) {
+Zombie::~Zombie() {
 	std::cout << this->_name << " is dead" << std::endl;
 }
 

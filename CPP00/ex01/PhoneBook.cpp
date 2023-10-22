@@ -1,11 +1,11 @@
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook(void) {
+PhoneBook::PhoneBook() {
 	std::cout << "Opening the phone book..." << std::endl;
 	this->_contactCount = 0;
 }
 
-PhoneBook::~PhoneBook(void) {
+PhoneBook::~PhoneBook() {
 	std::cout << std::endl << "Destroying the phone book." << std::endl;
 }
 

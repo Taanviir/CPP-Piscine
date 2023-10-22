@@ -4,7 +4,7 @@ Zombie::Zombie(std::string name) {
 	this->_name = name;
 }
 
-Zombie::~Zombie(void) {
+Zombie::~Zombie() {
 	std::cout << this->_name << " is dead" << std::endl;
 }
 

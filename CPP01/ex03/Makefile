@@ -7,7 +7,7 @@ RESET = "\033[0m"
 NAME = unnecessary_violence
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRCS = *.cpp
+SRCS = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 
 OBJ_DIR = obj/
 OBJS_LIST = $(SRCS:.cpp=.o)

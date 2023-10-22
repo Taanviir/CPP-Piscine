@@ -9,8 +9,8 @@
 class Contact {
 
 public:
-	Contact(void) {};
-	~Contact(void) {};
+	Contact() {};
+	~Contact() {};
 
 	// getters for private members
 	std::string getFirstName(void) const {return _firstName;};

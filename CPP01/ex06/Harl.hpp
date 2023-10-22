@@ -7,8 +7,9 @@
 class Harl {
 
 public:
-	Harl(void) {};
-	~Harl(void) {};
+	Harl() {};
+	~Harl() {};
+
 	void complain(std::string level);
 
 private:

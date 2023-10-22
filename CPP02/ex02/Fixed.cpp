@@ -1,35 +1,27 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed(void) {
-	this->_fixedPointValue = 0;
-}
-
-Fixed::Fixed(const Fixed& src) {
-	*this = src;
-}
-
 Fixed::Fixed(const int value) {
-	this->_fixedPointValue = value << this->_fractionalBits;
+	_fixedPointValue = value << _fractionalBits;
 }
 
 Fixed::Fixed(const float floatValue) {
-	this->_fixedPointValue = (int) roundf(floatValue * (1 << this->_fractionalBits));
+	_fixedPointValue = (int) roundf(floatValue * (1 << _fractionalBits));
 }
 
 int Fixed::getRawBits(void) const {
-	return this->_fixedPointValue;
+	return _fixedPointValue;
 }
 
 void Fixed::setRawBits(int const raw) {
-	this->_fixedPointValue = raw;
+	_fixedPointValue = raw;
 }
 
 float Fixed::toFloat(void) const {
-	return (this->_fixedPointValue / (float)(1 << this->_fractionalBits));
+	return (_fixedPointValue / (float)(1 << _fractionalBits));
 }
 
 int Fixed::toInt(void) const {
-	return (int)(this->_fixedPointValue >> this->_fractionalBits);
+	return (int)(_fixedPointValue >> _fractionalBits);
 }
 
 std::ostream& operator<<(std::ostream& out, const Fixed& fixedValue) {
