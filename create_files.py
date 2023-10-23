@@ -13,7 +13,10 @@ def create_cpp_file(file_name, output_path=""):
             file.write(f'#ifndef {file_name.upper()[:-4]}_HPP\n')
             file.write(f'# define {file_name.upper()[:-4]}_HPP\n\n')
             file.write('# include <iostream>\n\n')
-            file.write(f'class {file_name[:-4]} {{\n\npublic:\n\nprivate:\n\n}};\n\n')
+            file.write(f'class {file_name[:-4]} {{\n\npublic:\n')
+            if file_name[0].isupper():
+                file.write(f'{file_name}();\n~{file_name}();\n{file_name}(const {file_name}& copy);\n\n{filename}& operator=(const {file_name}& copy);')
+            file.write(f'\n\nprivate:\n\n}};\n\n')
             file.write(f'#endif // {file_name.upper()[:-4]}_HPP\n')
         elif file_name.endswith(".cpp"):
             # Source file
