@@ -1,8 +1,8 @@
 import os
 import sys
 
-def create_cpp_file(file_name, output_path=""):
-    if output_path:
+def create_cpp_file(file_name, output_path="./"):
+    if output_path != "./":
         file_path = os.path.join(output_path, file_name)
     else:
         file_path = file_name
@@ -15,7 +15,7 @@ def create_cpp_file(file_name, output_path=""):
             file.write('# include <iostream>\n\n')
             file.write(f'class {file_name[:-4]} {{\n\npublic:\n')
             if file_name[0].isupper():
-                file.write(f'{file_name}();\n~{file_name}();\n{file_name}(const {file_name}& copy);\n\n{filename}& operator=(const {file_name}& copy);')
+                file.write(f'\t{file_name[:-4]}();\n\t~{file_name[:-4]}();\n\t{file_name[:-4]}(const {file_name[:-4]}& copy);\n\n\t{file_name[:-4]}& operator=(const {file_name[:-4]}& copy);')
             file.write(f'\n\nprivate:\n\n}};\n\n')
             file.write(f'#endif // {file_name.upper()[:-4]}_HPP\n')
         elif file_name.endswith(".cpp"):
@@ -31,15 +31,17 @@ def create_cpp_file(file_name, output_path=""):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python create_cpp_files.py <file1> <file2> ... [output_path]")
+        print("Usage: python3 create_cpp_files.py <file1> <file2> ... [output_path]")
         return
 
-    output_path = ""
+    output_path = "./"
     if len(sys.argv) > 2 and not sys.argv[-1].endswith(".cpp") and not sys.argv[-1].endswith(".hpp"):
         output_path = sys.argv[-1]
-    
-    for file_name in sys.argv[1:-1]:
-        create_cpp_file(file_name, output_path)
+        for file_name in sys.argv[1:-1]:
+            create_cpp_file(file_name, output_path)
+    else:
+        for file_name in sys.argv[1:]:
+            create_cpp_file(file_name, output_path)
 
 if __name__ == "__main__":
     main()
