@@ -6,9 +6,9 @@ RESET = "\033[0m"
 
 NAME = phonebook
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
-INCLUDES = Contact.hpp PhoneBook.hpp
+INCLUDES = $(wildcard *.hpp)
 
-SRCS = PhoneBook.cpp main.cpp Contact.cpp
+SRCS = $(wildcard *.cpp)
 
 OBJ_DIR = obj/
 OBJS_LIST = $(SRCS:.cpp=.o)
@@ -18,11 +18,11 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@c++ $(CPPFLAGS) $(OBJS) -o $@
-	@echo $(GREEN_B)"Phonebook\033[0m is ready. ✅\n"$(RESET)
+	@echo $(GREEN_B)"$(NAME)\033[0m is ready. ✅\n"$(RESET)
 
 $(OBJ_DIR)%.o : %.cpp $(INCLUDES)
 	@mkdir -p $(OBJ_DIR)
-	@c++ $(CPPFLAGS) -c $< -o $@
+	@c++ $(CPPFLAGS) -I./ -c $< -o $@
 	@echo $(BLUE_I)"Compiling $<."$(RESET)
 
 clean :

@@ -6,9 +6,9 @@ RESET = "\033[0m"
 
 NAME = accounts
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
-INCLUDES = Account.hpp
+INCLUDES = $(wildcard *.hpp)
 
-SRCS = Account.cpp tests.cpp
+SRCS = $(wildcard *.cpp)
 
 OBJ_DIR = obj/
 OBJS_LIST = $(SRCS:.cpp=.o)
