@@ -29,6 +29,21 @@ def create_cpp_file(file_name, output_path="./"):
         else:
             print(f"Unsupported file type: {file_name}")
 
+def generate_makefile(output_path="./"):
+    if output_path != "./":
+        file_path = os.path.join(output_path, "Makefile")
+    else:
+        file_path = "Makefile"
+
+    with open('./Makefile_template', 'r') as template_file:
+        makefile_contents = template_file.read()
+    
+    execname = input("Enter the name of the executable: ")
+    makefile_contents = makefile_contents.replace("<program_name>", execname)
+
+    with open(file_path, 'w') as makefile:
+        makefile.write(makefile_contents)
+
 def main():
     if len(sys.argv) < 2:
         print("Usage: python3 create_cpp_files.py <file1> <file2> ... [output_path]")
@@ -42,6 +57,14 @@ def main():
     else:
         for file_name in sys.argv[1:]:
             create_cpp_file(file_name, output_path)
+
+    makefile = input("Do you want to create a Makefile? (y/n) ")
+    if makefile == "y":
+        generate_makefile(output_path)
+    elif makefile != "n":
+        print("Alright")
+    else:
+        print("Invalid Input")
 
 if __name__ == "__main__":
     main()
