@@ -22,7 +22,7 @@ $(NAME) : $(OBJS)
 
 $(OBJ_DIR)%.o : %.cpp $(INCLUDES)
 	@mkdir -p $(OBJ_DIR)
-	@c++ $(CPPFLAGS) -c $< -o $@
+	@c++ $(CPPFLAGS) -I./ -c $< -o $@
 	@echo $(BLUE_I)"Compiling $<."$(RESET)
 
 clean :
