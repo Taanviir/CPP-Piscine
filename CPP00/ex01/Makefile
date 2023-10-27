@@ -8,7 +8,7 @@ NAME = phonebook
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 INCLUDES = Contact.hpp PhoneBook.hpp
 
-SRCS = PhoneBook.cpp main.cpp
+SRCS = PhoneBook.cpp main.cpp Contact.cpp
 
 OBJ_DIR = obj/
 OBJS_LIST = $(SRCS:.cpp=.o)

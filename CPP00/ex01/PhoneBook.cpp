@@ -1,8 +1,10 @@
 #include "PhoneBook.hpp"
+#include <cstdlib>
+#include <iomanip>
 
 PhoneBook::PhoneBook() {
 	std::cout << "Opening the phone book..." << std::endl;
-	this->_contactCount = 0;
+	_contactCount = 0;
 }
 
 PhoneBook::~PhoneBook() {
@@ -20,11 +22,11 @@ static std::string getUserInfo(std::string message)
 				std::cout << std::endl << "EOF received, quitting program." << std::endl;
 				exit(1);
 			}
-			std::cerr << "Error: Invalid input" << std::endl << std::endl;
+			std::cout << "Error: Invalid input" << std::endl << std::endl;
 			continue;
 		}
 		if (input.empty()) {
-			std::cerr << "Error: Invalid input" << std::endl << std::endl;
+			std::cout << "Error: Invalid input" << std::endl << std::endl;
 			continue;
 		}
 		else
@@ -35,10 +37,10 @@ static std::string getUserInfo(std::string message)
 
 void PhoneBook::addContact(void) {
 
-	if (this->_contactCount > 7)
+	if (_contactCount > 7)
 		std::cout << "You have added the maximum possible number of contacts. "
 			<< "The contact being added now will overwrite "
-			<< this->getContact(this->_contactCount % 8).getFirstName() << std::endl;
+			<< getContact(_contactCount % 8).getFirstName() << std::endl;
 
 	Contact newContact;
 	newContact.setFirstName(getUserInfo("Enter the Contact's \e[1mFirst Name\e[0m: "));
@@ -47,8 +49,8 @@ void PhoneBook::addContact(void) {
 	newContact.setPhoneNumber(getUserInfo("Enter the Contact's \e[1mPhone Number\e[0m: "));
 	newContact.setDarkestSecret(getUserInfo("Enter the Contact's \e[1mDarkest Secret\e[0m: "));
 
-	this->setContact(newContact);
-	this->_contactCount++;
+	setContact(newContact);
+	_contactCount++;
 	std::cout << "Contact added.✅" << std::endl;
 }
 
@@ -58,17 +60,8 @@ static std::string truncate(std::string str) {
 	return str;
 }
 
-static void printContactInfo(Contact contact)
-{
-	std::cout << "Contact's \e[1mFirst Name\e[0m: " << contact.getFirstName() << std::endl;
-	std::cout << "Contact's \e[1mLast Name\e[0m: " << contact.getLastName() << std::endl;
-	std::cout << "Contact's \e[1mNickname\e[0m: " << contact.getNickname() << std::endl;
-	std::cout << "Contact's \e[1mPhone Number\e[0m: " << contact.getPhoneNumber() << std::endl;
-	std::cout << "Contact's \e[1mDarkest Secret\e[0m: " << contact.getDarkestSecret() << std::endl;
-}
-
 void PhoneBook::searchContact(void) {
-	if (!this->_contactCount)
+	if (!_contactCount)
 	{
 		std::cout << "No contacts to display!" << std::endl;
 		return;
@@ -80,11 +73,11 @@ void PhoneBook::searchContact(void) {
 		<< "|" << std::setw(10) << std::right << "LAST NAME"
 		<< "|" << std::setw(10) << std::right << "NICKNAME" << "|" << std::endl
 		<< "|----------|----------|----------|----------|" << std::endl;
-	for (int i = 0; i < (this->_contactCount > 8 ? 8 : this->_contactCount); i++) {
+	for (int i = 0; i < (_contactCount > 8 ? 8 : _contactCount); i++) {
 		std::cout << "|" << std::setw(10) << std::right << (i + 1)
-			<< "|" << std::setw(10) << std::right << truncate(this->getContact(i).getFirstName())
-			<< "|" << std::setw(10) << std::right << truncate(this->getContact(i).getLastName())
-			<< "|" << std::setw(10) << std::right << truncate(this->getContact(i).getNickname())
+			<< "|" << std::setw(10) << std::right << truncate(getContact(i).getFirstName())
+			<< "|" << std::setw(10) << std::right << truncate(getContact(i).getLastName())
+			<< "|" << std::setw(10) << std::right << truncate(getContact(i).getNickname())
 			<< "|" << std::endl << "|-------------------------------------------|" << std::endl;
 	}
 
@@ -97,21 +90,29 @@ void PhoneBook::searchContact(void) {
 				std::cout << std::endl << "EOF received, quitting program." << std::endl;
 				exit(1);
 			}
-			std::cerr << "Error: Invalid input" << std::endl;
+			std::cout << "Error: Invalid input" << std::endl;
 			break;
 		}
 		if (!input.empty() && input.size() == 1 && input >= "1" && input <= "8") {
-			if (atoi(input.c_str()) > this->_contactCount) {
+			if (atoi(input.c_str()) > _contactCount) {
 				std::cout << "No contact exists in this index." << std::endl << std::endl;
 				continue;
 			}
 			std::cout << std::endl << "Retrieving information of contact " << input << std::endl;
-			printContactInfo(this->getContact(atoi(input.c_str()) - 1));
+			(getContact(atoi(input.c_str()) - 1)).printContactInfo();
 			break;
 		}
 		else {
-			std::cerr << "Error: Invalid input" << std::endl << std::endl;
+			std::cout << "Error: Invalid input" << std::endl << std::endl;
 			continue;
 		}
 	}
+}
+
+Contact PhoneBook::getContact(int index) const {
+	return _contacts[index];
+}
+
+void PhoneBook::setContact(Contact contact) {
+	_contacts[_contactCount % 8] = contact;
 }

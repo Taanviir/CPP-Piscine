@@ -1,30 +1,29 @@
 #ifndef CONTACT_H
 # define CONTACT_H
 
-# include <iostream>
 # include <string>
-# include <iomanip>
-# include <cstdlib>
+# include <iostream>
 
 class Contact {
-
 public:
-	Contact() {};
-	~Contact() {};
+	Contact();
+	~Contact();
 
 	// getters for private members
-	std::string getFirstName(void) const {return _firstName;};
-	std::string getLastName(void) const {return _lastName;};
-	std::string getNickname(void) const {return _nickname;};
-	std::string getPhoneNumber(void) const {return _phoneNumber;};
-	std::string getDarkestSecret(void) const {return _darkestSecret;};
+	std::string getFirstName(void) const;
+	std::string getLastName(void) const;
+	std::string getNickname(void) const;
+	std::string getPhoneNumber(void) const;
+	std::string getDarkestSecret(void) const;
 
 	// setters for private members
-	void setFirstName(std::string newFirstName) {_firstName = newFirstName;};
-	void setLastName(std::string newLastName) {_lastName = newLastName;};
-	void setNickname(std::string newNickname) {_nickname = newNickname;};
-	void setPhoneNumber(std::string newPhoneNumber) {_phoneNumber = newPhoneNumber;};
-	void setDarkestSecret(std::string newDarkestSecret) {_darkestSecret = newDarkestSecret;}
+	void setFirstName(std::string newFirstName);
+	void setLastName(std::string newLastName);
+	void setNickname(std::string newNickname);
+	void setPhoneNumber(std::string newPhoneNumber);
+	void setDarkestSecret(std::string newDarkestSecret);
+
+	void printContactInfo(void) const;
 
 private:
 	std::string _firstName;
@@ -32,7 +31,6 @@ private:
 	std::string _nickname;
 	std::string _phoneNumber;
 	std::string _darkestSecret;
-
 };
 
 #endif

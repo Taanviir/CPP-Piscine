@@ -4,7 +4,6 @@
 # include "Contact.hpp"
 
 class PhoneBook {
-
 public:
 	PhoneBook();
 	~PhoneBook();
@@ -12,13 +11,12 @@ public:
 	void addContact(void);
 	void searchContact(void);
 
-	Contact getContact(int index) const {return this->_contacts[index];};
-	void setContact(Contact contact) {this->_contacts[this->_contactCount % 8] = contact;};
+	Contact getContact(int index) const;
+	void setContact(Contact contact);
 
 private:
 	Contact _contacts[8];
 	int _contactCount;
-
 };
 
 #endif
