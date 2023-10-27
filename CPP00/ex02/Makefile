@@ -18,7 +18,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@c++ $(CPPFLAGS) $(OBJS) -o $@
-	@echo $(GREEN_B)"Accounts\033[0m executable is ready. ✅\n"$(RESET)
+	@echo $(GREEN_B)"$(NAME)\033[0m executable is ready. ✅\n"$(RESET)
 
 $(OBJ_DIR)%.o : %.cpp $(INCLUDES)
 	@mkdir -p $(OBJ_DIR)
