@@ -1,4 +1,9 @@
 #include "Harl.hpp"
+#include <iostream>
+
+Harl::Harl() {}
+
+Harl::~Harl() {}
 
 void Harl::debug(void) {
 	std::cout << "[ DEBUG ]" << std::endl << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger." << std::endl << "I really do!" << std::endl << std::endl;
