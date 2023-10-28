@@ -2,13 +2,11 @@
 # define HARL_HPP
 
 # include <string>
-# include <iostream>
 
 class Harl {
-
 public:
-	Harl() {};
-	~Harl() {};
+	Harl();
+	~Harl();
 
 	void complain(std::string level);
 
@@ -17,7 +15,6 @@ private:
 	void info(void);
 	void warning(void);
 	void error(void);
-
 };
 
 typedef void (Harl::*functionPtr)(void);

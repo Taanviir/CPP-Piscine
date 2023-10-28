@@ -1,4 +1,5 @@
 #include "Harl.hpp"
+#include <iostream>
 
 static int getLevelOfProblem(std::string level) {
 	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
@@ -12,7 +13,7 @@ static int getLevelOfProblem(std::string level) {
 
 int main(int argc, char **argv) {
 	if (argc != 2) {
-		std::cerr << "Usage: ./harlFilter <level>" << std::endl;
+		std::cout << "Usage: ./harlFilter <level>" << std::endl;
 		return 1;
 	}
 
