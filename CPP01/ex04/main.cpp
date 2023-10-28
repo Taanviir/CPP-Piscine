@@ -14,7 +14,7 @@ static void replaceStringInFile(std::ofstream& outFile, std::string& line, const
 
 int main(int argc, char **argv) {
 	if (argc != 4) {
-		std::cerr << "Usage: ./replace_string <filename> <string1> <string2>" << std::endl;
+		std::cout << "Usage: ./replace_string <filename> <string1> <string2>" << std::endl;
 		return 1;
 	}
 
@@ -24,14 +24,14 @@ int main(int argc, char **argv) {
 	std::ifstream inFile;
 	inFile.open(argv[1]);
 	if (inFile.fail()) {
-		std::cerr << "Error: could not open file" << std::endl;
+		std::cout << "Error: could not open file" << std::endl;
 		return 1;
 	}
 
 	std::string outputFilename = filename + ".replace";
 	std::ofstream outFile(outputFilename.c_str());
 	if (outFile.fail()) {
-		std::cerr << "Error: could not create output file" << std::endl;
+		std::cout << "Error: could not create output file" << std::endl;
 		inFile.close();
 		return 1;
 	}
@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 		else if (inFile.eof())
 			break;
 		else {
-			std::cerr << "Error: could not read file" << std::endl;
+			std::cout << "Error: could not read file" << std::endl;
 			inFile.close();
 			return 1;
 		}
