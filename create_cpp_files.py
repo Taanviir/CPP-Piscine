@@ -61,7 +61,7 @@ def main():
     makefile = input("Do you want to create a Makefile? (y/n) ")
     if makefile == "y":
         generate_makefile(output_path)
-    elif makefile != "n":
+    elif makefile == "n":
         print("Alright")
     else:
         print("Invalid Input")
