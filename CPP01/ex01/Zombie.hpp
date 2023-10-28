@@ -2,13 +2,10 @@
 # define ZOMBIE_HPP
 
 # include <string>
-# include <iostream>
-# include <cstdlib>
 
 class Zombie {
-
 public:
-	Zombie() {};
+	Zombie();
 	~Zombie();
 
 	void announce(void);
@@ -16,7 +13,6 @@ public:
 
 private:
 	std::string _name;
-
 };
 
 Zombie* zombieHorde(int N, std::string name);

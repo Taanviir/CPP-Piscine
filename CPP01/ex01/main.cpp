@@ -1,18 +1,20 @@
 #include "Zombie.hpp"
+#include <cstdlib>
+#include <iostream>
 
 int main(int argc, char **argv) {
 	if (argc != 3) {
-		std::cerr << "Usage: ./zombieHorde <number of zombies> <name>" << std::endl;
+		std::cout << "Usage: ./zombieHorde <number of zombies> <name>" << std::endl;
 		return 1;
 	}
 	int N = atoi(argv[1]);
 	if (N <= 0) {
-		std::cerr << "Error: Invalid number of zombies" << std::endl;
+		std::cout << "Error: Invalid number of zombies" << std::endl;
 		return 1;
 	}
 	Zombie* zombies = zombieHorde(N, argv[2]);
 	if (!zombies) {
-		std::cerr << "Error: Failed to allocate memory for zombies" << std::endl;
+		std::cout << "Error: Failed to allocate memory for zombies" << std::endl;
 		return 1;
 	}
 	for (int i = 0; i < N; i++)
