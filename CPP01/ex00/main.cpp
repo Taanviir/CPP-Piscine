@@ -1,4 +1,5 @@
 #include "Zombie.hpp"
+#include <iostream>
 
 int main(void) {
 	std::cout << "<----------- STACK ZOMBIES ---------->" << std::endl;
@@ -13,6 +14,7 @@ int main(void) {
 	std::cout << "<----------- HEAP ZOMBIES ---------->" << std::endl;
 	Zombie* heapZombie = newZombie("heapZombie");
 	heapZombie->announce();
+	std::cout << std::endl;
 	delete heapZombie;
 
 	return 0;

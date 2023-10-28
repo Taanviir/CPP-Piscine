@@ -1,6 +1,7 @@
 #include "PhoneBook.hpp"
 #include <cstdlib>
 #include <iomanip>
+#include <iostream>
 
 PhoneBook::PhoneBook() {
 	std::cout << "Opening the phone book..." << std::endl;

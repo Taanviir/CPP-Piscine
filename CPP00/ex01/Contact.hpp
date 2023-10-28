@@ -2,7 +2,6 @@
 # define CONTACT_H
 
 # include <string>
-# include <iostream>
 
 class Contact {
 public:
