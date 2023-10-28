@@ -5,9 +5,8 @@
 # include <iostream>
 
 class Zombie {
-
 public:
-	Zombie(): _name("namelessZombie") {};
+	Zombie();
 	Zombie(std::string name);
 	~Zombie();
 
@@ -15,7 +14,6 @@ public:
 
 private:
 	std::string _name;
-
 };
 
 Zombie* newZombie(std::string name);
