@@ -1,11 +1,16 @@
 #include "Fixed.hpp"
+#include <cmath>
+
+const int Fixed::_fractionalBits = 8;
 
 Fixed::Fixed(): _fixedPointValue(0) {
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed& src): _fixedPointValue(src._fixedPointValue) {
+Fixed::Fixed(const Fixed& copy) {
 	std::cout << "Copy constructor called" << std::endl;
+	this->_fixedPointValue = copy.getRawBits();
+	*this = copy;
 }
 
 Fixed::Fixed(const int value) {
@@ -24,9 +29,10 @@ Fixed::~Fixed() {
 	std::cout << "Destructor called" << std::endl;
 }
 
-Fixed& Fixed::operator=(const Fixed& rhs) {
+Fixed& Fixed::operator=(const Fixed& copy) {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->_fixedPointValue = rhs.getRawBits();
+	if (this != &copy)
+		this->_fixedPointValue = copy.getRawBits();
 	return *this;
 }
 
@@ -35,18 +41,17 @@ int Fixed::getRawBits(void) const {
 }
 
 void Fixed::setRawBits(int const raw) {
-	std::cout << "setRawBits member function called" << std::endl;
 	_fixedPointValue = raw;
 }
 
 float Fixed::toFloat(void) const {
-	// dividing fixed point value by 256 to get float format
-	return (_fixedPointValue / (float)(1 << _fractionalBits));
+	// dividing fixed point value by 2^8 (256.0) to retrieve the float part
+	return ((_fixedPointValue) / (float)(1 << _fractionalBits));
 }
 
 int Fixed::toInt(void) const {
-	// multiplying fixed point value by 256 to get int format
-	return (int)(_fixedPointValue >> _fractionalBits);
+	// shifting fixed point value by 8 bits to the right to retrieve the integer part
+	return ((int)(_fixedPointValue >> _fractionalBits));
 }
 
 std::ostream& operator<<(std::ostream& out, const Fixed& fixedValue) {
