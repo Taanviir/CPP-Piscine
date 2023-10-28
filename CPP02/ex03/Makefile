@@ -7,7 +7,7 @@ RESET = "\033[0m"
 NAME = bsp
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRCS = main.cpp Fixed.cpp Point.cpp bsp.cpp
+SRCS = $(wildcard *.cpp)
 
 OBJ_DIR = obj/
 OBJS_LIST = $(SRCS:.cpp=.o)
@@ -30,7 +30,7 @@ clean :
 
 fclean : clean
 	@rm -f $(NAME)
-	@echo $(RED_B)"Executable removed.\n"$(RESET)
+	@echo $(RED_B)"$(NAME) removed.\n"$(RESET)
 
 re : fclean all
 

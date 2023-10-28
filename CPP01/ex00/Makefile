@@ -6,9 +6,8 @@ RESET = "\033[0m"
 
 NAME = zombie
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
-INCLUDES = Zombie.hpp
 
-SRCS = Zombie.cpp main.cpp randomChump.cpp newZombie.cpp
+SRCS = $(wildcard *.cpp)
 
 OBJ_DIR = obj/
 OBJS_LIST = $(SRCS:.cpp=.o)
@@ -18,9 +17,9 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@c++ $(CPPFLAGS) $(OBJS) -o $@
-	@echo $(GREEN_B)"Zombie\033[0m is ready. ✅\n"$(RESET)
+	@echo $(GREEN_B)$(NAME)$(RESET)" is ready. ✅\n"
 
-$(OBJ_DIR)%.o : %.cpp $(INCLUDES)
+$(OBJ_DIR)%.o : %.cpp
 	@mkdir -p $(OBJ_DIR)
 	@c++ $(CPPFLAGS) -c $< -o $@
 	@echo $(BLUE_I)"Compiling $<."$(RESET)
@@ -31,7 +30,7 @@ clean :
 
 fclean : clean
 	@rm -f $(NAME)
-	@echo $(RED_B)"Executable removed.\n"$(RESET)
+	@echo $(RED_B)"$(NAME) removed.\n"$(RESET)
 
 re : fclean all
 

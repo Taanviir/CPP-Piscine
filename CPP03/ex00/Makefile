@@ -30,7 +30,7 @@ clean :
 
 fclean : clean
 	@rm -f $(NAME)
-	@echo $(RED_B)"Executable removed.\n"$(RESET)
+	@echo $(RED_B)"$(NAME) removed.\n"$(RESET)
 
 re : fclean all
 

@@ -6,21 +6,19 @@ RESET = "\033[0m"
 NAME = megaphone
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRC = megaphone.cpp
+SRC = $(wildcard *.cpp)
 
 all : $(NAME)
 
 $(NAME) :
 	@c++ $(CPPFLAGS) $(SRC) -o $(NAME)
-	@echo $(GREEN_B)"Megaphone\033[0m is ready. ✅"$(RESET)
+	@echo $(GREEN_B)$(NAME)$(RESET)" is ready. ✅\n"
 
 clean :
 	@rm -f $(NAME)
-	@echo $(RED_B)"Executable removed.\n"$(RESET)
+	@echo $(RED_B)"$(NAME) removed.\n"$(RESET)
 
-fclean : 
-	@rm -f $(NAME)
-	@echo $(RED_B)"Executable removed.\n"$(RESET)
+fclean : clean
 
 re : fclean all
 

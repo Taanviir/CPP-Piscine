@@ -7,7 +7,7 @@ RESET = "\033[0m"
 NAME = harl
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRCS = main.cpp Harl.cpp
+SRCS = $(wildcard *.cpp)
 
 OBJ_DIR = obj/
 OBJS_LIST = $(SRCS:.cpp=.o)
@@ -17,7 +17,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@c++ $(CPPFLAGS) $(OBJS) -o $@
-	@echo $(GREEN_B)"harl\033[0m is ready. ✅\n"$(RESET)
+	@echo $(GREEN_B)$(NAME)$(RESET)" is ready. ✅\n"
 
 $(OBJ_DIR)%.o : %.cpp
 	@mkdir -p $(OBJ_DIR)
@@ -30,7 +30,7 @@ clean :
 
 fclean : clean
 	@rm -f $(NAME)
-	@echo $(RED_B)"Executable removed.\n"$(RESET)
+	@echo $(RED_B)"$(NAME) removed.\n"$(RESET)
 
 re : fclean all
 
