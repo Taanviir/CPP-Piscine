@@ -1,4 +1,15 @@
 #include "Fixed.hpp"
+#include <cmath>
+
+const int Fixed::_fractionalBits = 8;
+
+Fixed::Fixed() {
+	_fixedPointValue = 0;
+}
+
+Fixed::Fixed(const Fixed& copy) {
+	*this = copy;
+}
 
 Fixed::Fixed(const int value) {
 	_fixedPointValue = value << _fractionalBits;
@@ -7,6 +18,8 @@ Fixed::Fixed(const int value) {
 Fixed::Fixed(const float floatValue) {
 	_fixedPointValue = (int) roundf(floatValue * (1 << _fractionalBits));
 }
+
+Fixed::~Fixed() {}
 
 int Fixed::getRawBits(void) const {
 	return _fixedPointValue;
@@ -29,8 +42,9 @@ std::ostream& operator<<(std::ostream& out, const Fixed& fixedValue) {
 	return out;
 }
 
-Fixed& Fixed::operator=(const Fixed& fixedValue) {
-	this->_fixedPointValue = fixedValue.getRawBits();
+Fixed& Fixed::operator=(const Fixed& copy) {
+	if (this != &copy)
+		this->_fixedPointValue = copy.getRawBits();
 	return *this;
 }
 
@@ -59,23 +73,23 @@ bool Fixed::operator!=(const Fixed& fixedValue) const {
 }
 
 Fixed Fixed::operator+(const Fixed& fixedValue) {
-	return (this->toFloat() + fixedValue.toFloat());
+	return Fixed(_fixedPointValue + fixedValue.getRawBits());
 }
 
 Fixed Fixed::operator-(const Fixed& fixedValue) {
-	return (this->toFloat() - fixedValue.toFloat());
+	return Fixed(_fixedPointValue - fixedValue.getRawBits());
 }
 
 Fixed Fixed::operator*(const Fixed& fixedValue) {
-	return (this->toFloat() * fixedValue.toFloat());
+	return (this->toFloat() * fixedValue.toFloat()); //!
 }
 
 Fixed Fixed::operator/(const Fixed& fixedValue) {
 	if (fixedValue.getRawBits() == 0) {
-		std::cerr << "Error: Cannot divide by zero!" << std::endl;
+		std::cout << "Error: Cannot divide by zero!" << std::endl;
 		return 0;
 	}
-	return (this->toFloat() / fixedValue.toFloat());
+	return (this->toFloat() / fixedValue.toFloat()); //!
 }
 
 Fixed& Fixed::operator++(void) {

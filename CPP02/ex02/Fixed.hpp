@@ -2,18 +2,16 @@
 # define FIXED_HPP
 
 # include <iostream>
-# include <cmath>
 
 class Fixed {
-
 public:
-	Fixed(): _fixedPointValue(0) {};
-	Fixed(const Fixed& src): _fixedPointValue(src._fixedPointValue) {};
+	Fixed();
+	Fixed(const Fixed& copy);
 	Fixed(const int value);
 	Fixed(const float floatValue);
-	~Fixed() {};
+	~Fixed();
 
-	Fixed& operator=(const Fixed& fixedValue);
+	Fixed& operator=(const Fixed& copy);
 
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
@@ -44,8 +42,7 @@ public:
 
 private:
 	int _fixedPointValue;
-	static const int _fractionalBits = 8;
-
+	static const int _fractionalBits;
 };
 
 std::ostream& operator<<(std::ostream& out, const Fixed& fixedValue);
