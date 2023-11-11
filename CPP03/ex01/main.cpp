@@ -1,13 +1,14 @@
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main(void) {
 
-	// Instantiating ClapTrap objects
+	// Instantiating objects
 	ClapTrap machine1("Jack");
-	ClapTrap machine2("Mac");
+	ScavTrap machine2("Mac");
 
-	machine1.attack("f");
-	machine2.takeDamage(0);
+	machine2.attack("f");
+	machine1.takeDamage(0);
 	machine2.beRepaired(0);
 
 	return 0;

@@ -3,7 +3,7 @@
 #include <iostream>
 
 ClapTrap::ClapTrap(): _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "Default constructor called for ClapTrap" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& copy) {
@@ -22,7 +22,7 @@ ClapTrap::~ClapTrap() {
 ClapTrap& ClapTrap::operator=(const ClapTrap& copy) {
 	if (this == &copy) return *this;
 
-	std::cout << "Copy constructor called for ClapTrap " << this->_name << std::endl;
+	std::cout << "Copy operator called for ClapTrap " << this->_name << std::endl;
 	this->_name = copy._name;
 	this->_hitPoints = copy._hitPoints;
 	this->_energyPoints = copy._energyPoints;
