@@ -1,5 +1,5 @@
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef AANIMAL_HPP
+# define AANIMAL_HPP
 
 # include <string>
 
@@ -12,10 +12,11 @@ public:
 	AAnimal& operator=(const AAnimal& copy);
 
 	std::string getType(void) const;
-	virtual void makeSound(void) const = 0;
+	void setType(const std::string& newType);
+	virtual void makeSound(void) const;
 
 protected:
 	std::string type;
 };
 
-#endif // ANIMAL_HPP
+#endif // AANIMAL_HPP
