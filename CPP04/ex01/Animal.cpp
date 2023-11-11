@@ -26,6 +26,10 @@ std::string Animal::getType(void) const {
 	return type;
 }
 
+void Animal::setType(const std::string& newType) {
+	type = newType;
+}
+
 void Animal::makeSound(void) const {
 	std::cout << "Generic Animal sound!" << std::endl;
 }
