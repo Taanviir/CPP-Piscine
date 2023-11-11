@@ -7,7 +7,7 @@ RESET = "\033[0m"
 NAME = claptrap
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRCS = main.cpp ClapTrap.cpp
+SRCS = $(wildcard *.cpp)
 
 OBJ_DIR = obj/
 OBJS_LIST = $(SRCS:.cpp=.o)
