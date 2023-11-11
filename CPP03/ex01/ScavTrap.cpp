@@ -10,7 +10,7 @@ ScavTrap::ScavTrap(): ClapTrap() {
 }
 
 ScavTrap::ScavTrap(const ScavTrap& copy): ClapTrap(copy) {
-	*this = copy;
+	_guardMode = copy._guardMode;
 	std::cout << "Copy constructor called for ScavTrap " << _name << std::endl;
 }
 
