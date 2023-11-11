@@ -62,6 +62,9 @@ void ClapTrap::beRepaired(unsigned int amount) {
 	} else if (_hitPoints == 0) {
 		std::cout << "ClapTrap " << _name << " has already fallen. ☠️" << std::endl;
 		return;
+	} else if (amount == 0) {
+		std::cout << "Insufficient amount of points for repairing. ❌" << std::endl;
+		return;
 	} else if ((_hitPoints + amount) > 10) {
 		std::cout << "ClapTrap " << _name << " cannot have its hit points exceed 10." << std::endl;
 		return;
