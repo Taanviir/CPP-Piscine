@@ -12,7 +12,6 @@ def create_cpp_file(file_name, output_path="./"):
             # Header file
             file.write(f'#ifndef {file_name.upper()[:-4]}_HPP\n')
             file.write(f'# define {file_name.upper()[:-4]}_HPP\n\n')
-            file.write('# include <iostream>\n\n')
             file.write(f'class {file_name[:-4]} {{\npublic:\n')
             if file_name[0].isupper():
                 file.write(f'\t{file_name[:-4]}();\n\t~{file_name[:-4]}();\n\t{file_name[:-4]}(const {file_name[:-4]}& copy);\n\n\t{file_name[:-4]}& operator=(const {file_name[:-4]}& copy);')
