@@ -4,7 +4,7 @@ RED_B = "\033[1;31m"
 BLUE_I = "\033[2;34m"
 RESET = "\033[0m"
 
-NAME = fixedBetter
+NAME = fixed02
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRCS = $(wildcard *.cpp)
