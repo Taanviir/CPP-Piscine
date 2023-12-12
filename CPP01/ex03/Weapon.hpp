@@ -2,6 +2,7 @@
 # define WEAPON_HPP
 
 # include <string>
+
 class Weapon {
 public:
 	Weapon();
