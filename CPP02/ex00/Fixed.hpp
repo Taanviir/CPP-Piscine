@@ -13,7 +13,7 @@ public:
 	void setRawBits(int const raw);
 
 private:
-	int _fixedPointValue;
+	int _rawBits;
 	static const int _fractionalBits;
 };
 

@@ -19,7 +19,7 @@ public:
 	int toInt(void) const;
 
 private:
-	int _fixedPointValue;
+	int _rawBits;
 	static const int _fractionalBits;
 };
 

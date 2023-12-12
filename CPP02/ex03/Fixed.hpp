@@ -41,7 +41,7 @@ public:
 	static const Fixed& max(const Fixed& a, const Fixed& b);
 
 private:
-	int _fixedPointValue;
+	int _rawBits;
 	static const int _fractionalBits;
 };
 
