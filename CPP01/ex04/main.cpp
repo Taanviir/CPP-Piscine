@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <sys/stat.h>
 #include <fstream>
 
 #define RED "\e[1;31m"
@@ -27,6 +28,19 @@ int main(int argc, char **argv) {
 	std::string str1 = argv[2];
 	std::string str2 = argv[3];
 	std::ifstream inFile;
+
+	if (str1.empty()) {
+		std::cout << "Error: No string to be replaced." << std::endl;
+		return 1;
+	}
+
+	struct stat fileInfo;
+	stat(inputFile.c_str(), &fileInfo);
+	if (S_ISDIR(fileInfo.st_mode)) {
+		std::cout << "Error: Directory entered." << std::endl;
+		return 1;
+	}
+
 	inFile.open(inputFile.c_str());
 	if (inFile.fail()) {
 		std::cout << "Error: could not open file" << std::endl;
