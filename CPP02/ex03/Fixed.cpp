@@ -72,45 +72,53 @@ bool Fixed::operator!=(const Fixed& other) const {
 	return (this->_rawBits != other.getRawBits());
 }
 
-Fixed Fixed::operator+(const Fixed& other) {
+// Addition
+Fixed Fixed::operator+(const Fixed& other) const {
 	return Fixed(_rawBits + other.getRawBits());
 }
 
-Fixed Fixed::operator-(const Fixed& other) {
+// Subtraction
+Fixed Fixed::operator-(const Fixed& other) const {
 	return Fixed(_rawBits - other.getRawBits());
 }
 
-Fixed Fixed::operator*(const Fixed& other) {
-	return (this->toFloat() * other.toFloat()); //!
+// Multiplication
+Fixed Fixed::operator*(const Fixed& other) const {
+	Fixed result(0);
+	result._rawBits = (_rawBits * other._rawBits) >> _fractionalBits;
+	return result;
 }
 
-Fixed Fixed::operator/(const Fixed& other) {
-	if (other.getRawBits() == 0) {
-		std::cout << "Error: Cannot divide by zero!" << std::endl;
-		return 0;
-	}
-	return (this->toFloat() / other.toFloat()); //!
+// Division
+Fixed Fixed::operator/(const Fixed& other) const {
+	Fixed result(0);
+	result._rawBits = ((_rawBits << _fractionalBits) / other._rawBits);
+	return result;
 }
 
+// Pre-Increment
 Fixed& Fixed::operator++(void) {
 	this->_rawBits++;
 	return *this;
 }
 
+// Post-Increment
 Fixed Fixed::operator++(int) {
 	Fixed tmp = *this;
-	++((*this));
+	this->_rawBits++;
 	return tmp;
 }
 
+// Pre-Decrement
 Fixed& Fixed::operator--(void) {
 	this->_rawBits--;
 	return *this;
 }
 
+// Post-Decrement
 Fixed Fixed::operator--(int) {
 	Fixed tmp = *this;
-	--(*this);
+	this->_rawBits--;
 	return tmp;
 }
 
