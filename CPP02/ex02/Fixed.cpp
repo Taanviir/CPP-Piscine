@@ -37,8 +37,8 @@ int Fixed::toInt(void) const {
 	return (int)(_rawBits >> _fractionalBits);
 }
 
-std::ostream& operator<<(std::ostream& out, const Fixed& fixedValue) {
-	out << fixedValue.toFloat();
+std::ostream& operator<<(std::ostream& out, const Fixed& other) {
+	out << other.toFloat();
 	return out;
 }
 
@@ -48,48 +48,48 @@ Fixed& Fixed::operator=(const Fixed& copy) {
 	return *this;
 }
 
-bool Fixed::operator>(const Fixed& fixedValue) const {
-	return (this->_rawBits > fixedValue.getRawBits());
+bool Fixed::operator>(const Fixed& other) const {
+	return (this->_rawBits > other.getRawBits());
 }
 
-bool Fixed::operator<(const Fixed& fixedValue) const {
-	return (this->_rawBits < fixedValue.getRawBits());
+bool Fixed::operator<(const Fixed& other) const {
+	return (this->_rawBits < other.getRawBits());
 }
 
-bool Fixed::operator>=(const Fixed& fixedValue) const {
-	return (this->_rawBits >= fixedValue.getRawBits());
+bool Fixed::operator>=(const Fixed& other) const {
+	return (this->_rawBits >= other.getRawBits());
 }
 
-bool Fixed::operator<=(const Fixed& fixedValue) const {
-	return (this->_rawBits <= fixedValue.getRawBits());
+bool Fixed::operator<=(const Fixed& other) const {
+	return (this->_rawBits <= other.getRawBits());
 }
 
-bool Fixed::operator==(const Fixed& fixedValue) const {
-	return (this->_rawBits == fixedValue.getRawBits());
+bool Fixed::operator==(const Fixed& other) const {
+	return (this->_rawBits == other.getRawBits());
 }
 
-bool Fixed::operator!=(const Fixed& fixedValue) const {
-	return (this->_rawBits != fixedValue.getRawBits());
+bool Fixed::operator!=(const Fixed& other) const {
+	return (this->_rawBits != other.getRawBits());
 }
 
-Fixed Fixed::operator+(const Fixed& fixedValue) {
-	return Fixed(_rawBits + fixedValue.getRawBits());
+Fixed Fixed::operator+(const Fixed& other) {
+	return Fixed(_rawBits + other.getRawBits());
 }
 
-Fixed Fixed::operator-(const Fixed& fixedValue) {
-	return Fixed(_rawBits - fixedValue.getRawBits());
+Fixed Fixed::operator-(const Fixed& other) {
+	return Fixed(_rawBits - other.getRawBits());
 }
 
-Fixed Fixed::operator*(const Fixed& fixedValue) {
-	return (this->toFloat() * fixedValue.toFloat()); //!
+Fixed Fixed::operator*(const Fixed& other) {
+	return (this->toFloat() * other.toFloat()); //!
 }
 
-Fixed Fixed::operator/(const Fixed& fixedValue) {
-	if (fixedValue.getRawBits() == 0) {
+Fixed Fixed::operator/(const Fixed& other) {
+	if (other.getRawBits() == 0) {
 		std::cout << "Error: Cannot divide by zero!" << std::endl;
 		return 0;
 	}
-	return (this->toFloat() / fixedValue.toFloat()); //!
+	return (this->toFloat() / other.toFloat()); //!
 }
 
 Fixed& Fixed::operator++(void) {

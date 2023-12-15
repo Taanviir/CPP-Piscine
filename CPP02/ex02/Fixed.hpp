@@ -18,17 +18,17 @@ public:
 	float toFloat(void) const;
 	int toInt(void) const;
 
-	bool operator>(const Fixed& fixedValue) const;
-	bool operator<(const Fixed& fixedValue) const;
-	bool operator>=(const Fixed& fixedValue) const;
-	bool operator<=(const Fixed& fixedValue) const;
-	bool operator==(const Fixed& fixedValue) const;
-	bool operator!=(const Fixed& fixedValue) const;
+	bool operator>(const Fixed& other) const;
+	bool operator<(const Fixed& other) const;
+	bool operator>=(const Fixed& other) const;
+	bool operator<=(const Fixed& other) const;
+	bool operator==(const Fixed& other) const;
+	bool operator!=(const Fixed& other) const;
 
-	Fixed operator+(const Fixed& fixedValue);
-	Fixed operator-(const Fixed& fixedValue);
-	Fixed operator*(const Fixed& fixedValue);
-	Fixed operator/(const Fixed& fixedValue);
+	Fixed operator+(const Fixed& other);
+	Fixed operator-(const Fixed& other);
+	Fixed operator*(const Fixed& other);
+	Fixed operator/(const Fixed& other);
 
 	Fixed& operator++(void);
 	Fixed operator++(int);
@@ -45,6 +45,6 @@ private:
 	static const int _fractionalBits;
 };
 
-std::ostream& operator<<(std::ostream& out, const Fixed& fixedValue);
+std::ostream& operator<<(std::ostream& out, const Fixed& other);
 
 #endif
