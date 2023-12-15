@@ -85,14 +85,18 @@ Fixed Fixed::operator-(const Fixed& other) const {
 // Multiplication
 Fixed Fixed::operator*(const Fixed& other) const {
 	Fixed result(0);
-	result._rawBits = (_rawBits * other._rawBits) >> _fractionalBits;
+	result._rawBits = ((int64_t) _rawBits * (int64_t) other._rawBits) / (1 << _fractionalBits);
 	return result;
 }
 
 // Division
 Fixed Fixed::operator/(const Fixed& other) const {
+	if (other.getRawBits() == 0) {
+		std::cout << "Division by zero is not possible!" << std::endl;
+		return Fixed(0);
+	}
 	Fixed result(0);
-	result._rawBits = ((_rawBits << _fractionalBits) / other._rawBits);
+	result._rawBits = (((int64_t) _rawBits * (1 << _fractionalBits)) / other._rawBits);
 	return result;
 }
 

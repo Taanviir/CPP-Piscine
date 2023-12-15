@@ -91,6 +91,10 @@ Fixed Fixed::operator*(const Fixed& other) const {
 
 // Division
 Fixed Fixed::operator/(const Fixed& other) const {
+	if (other.getRawBits() == 0) {
+		std::cout << "Division by zero is not possible!" << std::endl;
+		return Fixed(0);
+	}
 	Fixed result(0);
 	result._rawBits = (((int64_t) _rawBits * (1 << _fractionalBits)) / other._rawBits);
 	return result;
