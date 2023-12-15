@@ -67,6 +67,10 @@ def generate_makefile(output_path="./"):
         makefile.write("valgrind : re\n")
         makefile.write("\t@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)\n\n")
         
+        makefile.write("debug : CPPFLAGS+=-g3 -fsanitize=address\n")
+        makefile.write("debug : re\n")
+        makefile.write("\t@./$(NAME)\n\n")
+        
         makefile.write("clean :\n")
         makefile.write("\t@rm -rf $(OBJ_DIR)\n")
         makefile.write("\t@echo $(RED_B)\"Object files removed.\"$(RESET)\n\n")
