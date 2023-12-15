@@ -24,6 +24,9 @@ $(OBJ_DIR)%.o : %.cpp
 	@c++ $(CPPFLAGS) -I./ -c $< -o $@
 	@echo $(BLUE_I)"Compiling $<."$(RESET)
 
+debug : CPPFLAGS += -g -fsanitize=address
+debug : re
+
 clean :
 	@rm -rf $(OBJ_DIR)
 	@echo $(RED_B)"Object files removed."$(RESET)
