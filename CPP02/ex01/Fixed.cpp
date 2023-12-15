@@ -53,7 +53,7 @@ int Fixed::toInt(void) const {
 	return ((int)(_rawBits >> _fractionalBits));
 }
 
-std::ostream& operator<<(std::ostream& out, const Fixed& fixedValue) {
-	out << fixedValue.toFloat();
+std::ostream& operator<<(std::ostream& out, const Fixed& other) {
+	out << other.toFloat();
 	return out;
 }

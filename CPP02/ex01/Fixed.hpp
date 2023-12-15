@@ -23,6 +23,6 @@ private:
 	static const int _fractionalBits;
 };
 
-std::ostream& operator<<(std::ostream& out, const Fixed& fixedValue);
+std::ostream& operator<<(std::ostream& out, const Fixed& other);
 
 #endif
