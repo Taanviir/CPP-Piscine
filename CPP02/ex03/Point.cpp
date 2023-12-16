@@ -10,13 +10,12 @@ Point::Point(const Point& copy) {
 
 Point::~Point() {}
 
-Point& Point::operator=(const Point& rhs)
-{
-	if (this != &rhs)
-	{
-		this->_x = rhs._x;
-		this->_y = rhs._y;
-	}
+Point& Point::operator=(const Point& rhs) {
+	if (this == &rhs) return *this;
+
+	// this->~Point(); // manually destruct this object
+
+	// new (this) Point(rhs); // using placement new syntax to copy-construct new object
 	return (*this);
 }
 
