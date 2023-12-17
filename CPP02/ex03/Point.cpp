@@ -11,9 +11,8 @@ Point::~Point() {}
 Point& Point::operator=(const Point& rhs) {
 	if (this == &rhs) return *this;
 
-	// not sure how to do this
-	// this->~Point(); // manually destruct this object
-	// new (this) Point(rhs); // using placement new syntax to copy-construct new object
+	this->~Point(); // manually destruct this object
+	new (this) Point(rhs); // using placement new syntax to copy-construct new object
 	return (*this);
 }
 
