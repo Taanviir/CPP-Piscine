@@ -7,9 +7,7 @@ Fixed::Fixed() {
 	_rawBits = 0;
 }
 
-Fixed::Fixed(const Fixed& copy) {
-	*this = copy;
-}
+Fixed::Fixed(const Fixed& copy): _rawBits(copy._rawBits) {}
 
 Fixed::Fixed(const int value) {
 	_rawBits = value << _fractionalBits;

@@ -7,9 +7,8 @@ Fixed::Fixed(): _rawBits(0) {
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed& copy) {
+Fixed::Fixed(const Fixed& copy): _rawBits(copy._rawBits) {
 	std::cout << "Copy constructor called" << std::endl;
-	*this = copy;
 }
 
 Fixed::Fixed(const int value) {
