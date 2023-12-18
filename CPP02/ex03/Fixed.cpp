@@ -42,32 +42,32 @@ std::ostream& operator<<(std::ostream& out, const Fixed& other) {
 
 Fixed& Fixed::operator=(const Fixed& copy) {
 	if (this != &copy)
-		this->_rawBits = copy.getRawBits();
+		this->_rawBits = copy._rawBits;
 	return *this;
 }
 
 bool Fixed::operator>(const Fixed& other) const {
-	return (this->_rawBits > other.getRawBits());
+	return (this->_rawBits > other._rawBits);
 }
 
 bool Fixed::operator<(const Fixed& other) const {
-	return (this->_rawBits < other.getRawBits());
+	return (this->_rawBits < other._rawBits);
 }
 
 bool Fixed::operator>=(const Fixed& other) const {
-	return (this->_rawBits >= other.getRawBits());
+	return (this->_rawBits >= other._rawBits);
 }
 
 bool Fixed::operator<=(const Fixed& other) const {
-	return (this->_rawBits <= other.getRawBits());
+	return (this->_rawBits <= other._rawBits);
 }
 
 bool Fixed::operator==(const Fixed& other) const {
-	return (this->_rawBits == other.getRawBits());
+	return (this->_rawBits == other._rawBits);
 }
 
 bool Fixed::operator!=(const Fixed& other) const {
-	return (this->_rawBits != other.getRawBits());
+	return (this->_rawBits != other._rawBits);
 }
 
 // Addition
@@ -88,7 +88,7 @@ Fixed Fixed::operator-(const Fixed& other) const {
 
 // Multiplication
 Fixed Fixed::operator*(const Fixed& other) const {
-	Fixed result(0);
+	Fixed result;
 	result._rawBits = ((int64_t) _rawBits * (int64_t) other._rawBits) / (1 << _fractionalBits);
 	return result;
 }
@@ -99,7 +99,7 @@ Fixed Fixed::operator/(const Fixed& other) const {
 		std::cout << "Division by zero is not possible!" << std::endl;
 		return Fixed(0);
 	}
-	Fixed result(0);
+	Fixed result;
 	result._rawBits = (((int64_t) _rawBits * (1 << _fractionalBits)) / other._rawBits);
 	return result;
 }

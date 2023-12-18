@@ -19,7 +19,5 @@ bool bsp(Point const a, Point const b, Point const c, Point const point) {
 	denominator = Cy - Ay;
 	Fixed length2(numerator / denominator);
 
-	if (length1 >= 0 && length2 >= 0 && (length1 + length2) <= 1)
-		return true;
-	return false;
+	return (length1 >= 0 && length2 >= 0 && (length1 + length2) <= 1);
 }
