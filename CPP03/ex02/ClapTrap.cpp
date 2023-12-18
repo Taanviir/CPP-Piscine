@@ -6,8 +6,7 @@ ClapTrap::ClapTrap(): _name("Default"), _hitPoints(10), _energyPoints(10), _atta
 	std::cout << "Default constructor called for ClapTrap" << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap& copy) {
-	*this = copy;
+ClapTrap::ClapTrap(const ClapTrap& copy): _name(copy._name), _hitPoints(copy._hitPoints), _energyPoints(copy._energyPoints), _attackDamage(copy._attackDamage) {
 	std::cout << "Copy constructor called for ClapTrap " << _name << std::endl;
 }
 

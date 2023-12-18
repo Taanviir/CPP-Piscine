@@ -9,8 +9,7 @@ DiamondTrap::DiamondTrap(): ClapTrap("Default") {
 	std::cout << "Default constructor called for DiamondTrap" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& copy): ClapTrap(copy), ScavTrap(copy), FragTrap(copy) {
-	*this = copy;
+DiamondTrap::DiamondTrap(const DiamondTrap& copy): ClapTrap(copy), ScavTrap(copy), FragTrap(copy), _name(copy._name) {
 	std::cout << "Copy constructor called for DiamondTrap " << _name << std::endl;
 }
 
