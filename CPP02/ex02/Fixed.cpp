@@ -72,12 +72,18 @@ bool Fixed::operator!=(const Fixed& other) const {
 
 // Addition
 Fixed Fixed::operator+(const Fixed& other) const {
-	return Fixed(_rawBits + other.getRawBits());
+	// Instantiated new object to store result as directly doing Fixed(addition)
+	// disregards the fractional bits in the addition.
+	Fixed result;
+	result._rawBits = (_rawBits + other._rawBits);
+	return result;
 }
 
 // Subtraction
 Fixed Fixed::operator-(const Fixed& other) const {
-	return Fixed(_rawBits - other.getRawBits());
+	Fixed result;
+	result._rawBits = (_rawBits - other._rawBits);
+	return result;
 }
 
 // Multiplication
