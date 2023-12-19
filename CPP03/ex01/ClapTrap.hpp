@@ -6,9 +6,9 @@
 class ClapTrap {
 public:
 	ClapTrap();
+	~ClapTrap();
 	ClapTrap(const ClapTrap& copy);
 	ClapTrap(std::string name);
-	~ClapTrap();
 
 	ClapTrap& operator=(const ClapTrap& copy);
 

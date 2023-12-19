@@ -1,26 +1,35 @@
 #include "ClapTrap.hpp"
-#include <cstring>
 #include <iostream>
 
-ClapTrap::ClapTrap(): _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+ClapTrap::ClapTrap() {
+	_name = "Default";
+	_hitPoints = 10;
+	_energyPoints = 10;
+	_attackDamage = 0;
 	std::cout << "Default constructor called for ClapTrap" << std::endl;
-}
-
-ClapTrap::ClapTrap(const ClapTrap& copy): _name(copy._name), _hitPoints(copy._hitPoints), _energyPoints(copy._energyPoints), _attackDamage(copy._attackDamage) {
-	std::cout << "Copy constructor called for ClapTrap " << _name << std::endl;
-}
-
-ClapTrap::ClapTrap(std::string name): _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-	std::cout << "Constructor called for ClapTrap " << _name << std::endl;
 }
 
 ClapTrap::~ClapTrap() {
 	std::cout << "Destructor called for ClapTrap " << _name << std::endl;
 }
 
-ClapTrap& ClapTrap::operator=(const ClapTrap& copy) {
-	if (this == &copy) return *this;
+ClapTrap::ClapTrap(const ClapTrap& copy) {
+	_name = copy._name;
+	_hitPoints = copy._hitPoints;
+	_energyPoints = copy._energyPoints;
+	_attackDamage = copy._attackDamage;
+	std::cout << "Copy constructor called for ClapTrap " << _name << std::endl;
+}
 
+ClapTrap::ClapTrap(std::string name) {
+	_name = name;
+	_hitPoints = 10;
+	_energyPoints = 10;
+	_attackDamage = 0;
+	std::cout << "Constructor called for ClapTrap " << _name << std::endl;
+}
+
+ClapTrap& ClapTrap::operator=(const ClapTrap& copy) {
 	this->_name = copy._name;
 	this->_hitPoints = copy._hitPoints;
 	this->_energyPoints = copy._energyPoints;
