@@ -1,5 +1,4 @@
 #include "ClapTrap.hpp"
-#include <cstring>
 #include <iostream>
 
 ClapTrap::ClapTrap(): _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
@@ -19,8 +18,6 @@ ClapTrap::ClapTrap(std::string name): _name(name), _hitPoints(10), _energyPoints
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& copy) {
-	if (this == &copy) return *this;
-
 	this->_name = copy._name;
 	this->_hitPoints = copy._hitPoints;
 	this->_energyPoints = copy._energyPoints;
