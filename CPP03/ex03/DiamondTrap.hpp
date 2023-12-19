@@ -14,7 +14,7 @@ public:
 
 	DiamondTrap& operator=(const DiamondTrap& copy);
 
-	void attack(const std::string& target);
+	using ScavTrap::attack;
 	void whoAmI(void);
 
 private:

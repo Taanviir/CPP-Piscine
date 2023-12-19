@@ -34,10 +34,6 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& copy) {
 	return *this;
 }
 
-void DiamondTrap::attack(const std::string& target) {
-	ScavTrap::attack(target);
-}
-
 void DiamondTrap::whoAmI(void) {
 	std::cout << "DiamondTrap Name: " << _name << " 💎" << std::endl;
 	std::cout << "ClapTrap Name: " << ClapTrap::_name  << " 👏" << std::endl;
