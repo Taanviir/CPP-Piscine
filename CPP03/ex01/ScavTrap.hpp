@@ -6,9 +6,9 @@
 class ScavTrap: public ClapTrap {
 public:
 	ScavTrap();
+	~ScavTrap();
 	ScavTrap(const ScavTrap& copy);
 	ScavTrap(std::string name);
-	~ScavTrap();
 
 	ScavTrap& operator=(const ScavTrap& copy);
 

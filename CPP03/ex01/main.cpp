@@ -12,6 +12,7 @@ int main(void) {
 	machine2.attack("f");
 	machine1.takeDamage(0);
 	machine2.beRepaired(0);
+	machine2.guardGate();
 
 	return 0;
 }
