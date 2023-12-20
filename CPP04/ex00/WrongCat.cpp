@@ -3,7 +3,7 @@
 
 WrongCat::WrongCat(): WrongAnimal() {
 	std::cout << "Default WrongCat constructor called." << std::endl;
-	type = "WrongCat";
+	_type = "WrongCat";
 }
 
 WrongCat::~WrongCat() {
@@ -11,15 +11,13 @@ WrongCat::~WrongCat() {
 }
 
 WrongCat::WrongCat(const WrongCat& copy): WrongAnimal(copy) {
-	*this = copy;
 	std::cout << "WrongCat Copy constructor called." << std::endl;
+	this->_type = copy._type;
 }
 
 WrongCat& WrongCat::operator=(const WrongCat& copy) {
 	std::cout << "WrongCat copy assignment operator called." << std::endl;
-	if (this == &copy) return *this;
-
-	this->type = copy.type;
+	this->_type = copy._type;
 	return *this;
 }
 
