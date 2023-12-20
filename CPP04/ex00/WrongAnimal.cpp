@@ -3,7 +3,7 @@
 
 WrongAnimal::WrongAnimal() {
 	std::cout << "Default Wrong Animal constructor called." << std::endl;
-	_type = "none";
+	_type = "No Type";
 }
 
 WrongAnimal::~WrongAnimal() {

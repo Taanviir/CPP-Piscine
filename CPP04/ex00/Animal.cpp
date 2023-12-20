@@ -3,7 +3,7 @@
 
 Animal::Animal() {
 	std::cout << "Default Animal constructor called." << std::endl;
-	_type = "none";
+	_type = "No Type";
 }
 
 Animal::~Animal() {

@@ -3,24 +3,38 @@
 #include "Cat.hpp"
 #include "WrongCat.hpp"
 
-int main()
-{
-    const Animal* meta = new Animal();
-    const Animal* j = new Dog();
-    const Animal* i = new Cat();
-    const WrongAnimal* wrongAnimal = new WrongAnimal();
-    const WrongCat* wrongCat = new WrongCat();
-    std::cout << j->getType() << " " << std::endl;
-    std::cout << i->getType() << " " << std::endl;
-    std::cout << wrongCat->getType() << " " << std::endl;
-    i->makeSound(); //will output the cat sound!
-    j->makeSound();
-    wrongCat->makeSound();
-    meta->makeSound();
-    delete wrongCat;
-    delete wrongAnimal;
-    delete meta;
-    delete i;
-    delete j;
+int main(int argc, char const **argv) {
+    if (argc != 2) {
+        std::cout << "Usage: ./animalSounds [1|2]" << std::endl;
+        return 1;
+    }
+    if (argv[1][0] == '1') {
+        const Animal* meta = new Animal();
+        const Animal* dog = new Dog();
+        const Animal* cat = new Cat();
+        std::cout << std::endl;
+        std::cout << meta->getType() << " " << std::endl;
+        std::cout << dog->getType() << " " << std::endl;
+        std::cout << cat->getType() << " " << std::endl;
+        std::cout << std::endl;
+        cat->makeSound(); //will output the cat sound!
+        dog->makeSound();
+        meta->makeSound();
+        std::cout << std::endl;
+        delete meta;
+        delete cat;
+        delete dog;
+    } else {
+        const WrongAnimal* wrongAnimal = new WrongAnimal();
+        const WrongCat* wrongCat = new WrongCat();
+        std::cout << std::endl;
+        std::cout << wrongCat->getType() << " " << std::endl;
+        std::cout << std::endl;
+        wrongCat->makeSound();
+        std::cout << std::endl;
+        delete wrongCat;
+        delete wrongAnimal;
+    }
+
     return 0;
 }
