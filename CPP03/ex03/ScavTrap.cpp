@@ -9,6 +9,10 @@ ScavTrap::ScavTrap(): ClapTrap() {
 	std::cout << "Default constructor called for ScavTrap" << std::endl;
 }
 
+ScavTrap::~ScavTrap() {
+	std::cout << "Destructor called for ScavTrap " << _name << std::endl;
+}
+
 ScavTrap::ScavTrap(const ScavTrap& copy): ClapTrap(copy) {
 	_guardMode = copy._guardMode;
 	std::cout << "Copy constructor called for ScavTrap " << _name << std::endl;
@@ -22,13 +26,7 @@ ScavTrap::ScavTrap(std::string name): ClapTrap(name) {
 	std::cout << "Constructor called for ScavTrap " << _name << std::endl;
 }
 
-ScavTrap::~ScavTrap() {
-	std::cout << "Destructor called for ScavTrap " << _name << std::endl;
-}
-
 ScavTrap& ScavTrap::operator=(const ScavTrap& copy) {
-	if (this == &copy) return *this;
-
 	this->_name = copy._name;
 	this->_hitPoints = copy._hitPoints;
 	this->_energyPoints = copy._energyPoints;
