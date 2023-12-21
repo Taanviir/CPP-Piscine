@@ -21,8 +21,26 @@ ClapTrap::ClapTrap(const ClapTrap& copy) {
 	std::cout << "Copy constructor called for ClapTrap " << _name << std::endl;
 }
 
+ClapTrap::ClapTrap(std::string* name) {
+	if (name == NULL || (*name).empty()) {
+		std::cout << "Invalid name entered for ClapTrap, name set to \"Unknown\". ❌" << std::endl;
+		_name = "Unknown";
+	} else {
+		_name = *name;
+	}
+	_hitPoints = 10;
+	_energyPoints = 10;
+	_attackDamage = 0;
+	std::cout << "Constructor called for ClapTrap " << _name << std::endl;
+}
+
 ClapTrap::ClapTrap(std::string name) {
-	_name = name;
+	if (name.empty()) {
+		std::cout << "Invalid name entered for ClapTrap, name set to \"Unknown\". ❌" << std::endl;
+		_name = "Unknown";
+	} else {
+		_name = name;
+	}
 	_hitPoints = 10;
 	_energyPoints = 10;
 	_attackDamage = 0;
@@ -44,6 +62,9 @@ void ClapTrap::attack(const std::string& target) {
 		return;
 	} else if (_hitPoints == 0) {
 		std::cout << "ClapTrap " << _name << " has fallen. ☠️" << std::endl;
+		return;
+	} else if (target.empty()) {
+		std::cout << "ClapTrap " << _name << " cannot attack due to invalid target. ❌" << std::endl;
 		return;
 	}
 

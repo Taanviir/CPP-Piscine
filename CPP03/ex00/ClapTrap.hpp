@@ -8,6 +8,7 @@ public:
 	ClapTrap();
 	~ClapTrap();
 	ClapTrap(const ClapTrap& copy);
+	ClapTrap(std::string* name);
 	ClapTrap(std::string name);
 
 	ClapTrap& operator=(const ClapTrap& copy);

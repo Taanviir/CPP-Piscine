@@ -5,6 +5,7 @@ int main(void) {
 	// Instantiating ClapTrap objects
 	ClapTrap machine1("Jack");
 	ClapTrap machine2("Mac");
+	ClapTrap machine3(NULL);
 
 	machine1.attack("f");
 	machine2.takeDamage(0);
