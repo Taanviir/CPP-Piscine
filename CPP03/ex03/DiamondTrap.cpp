@@ -1,7 +1,7 @@
 #include "DiamondTrap.hpp"
 #include <iostream>
 
-DiamondTrap::DiamondTrap(): ClapTrap("Default") {
+DiamondTrap::DiamondTrap(): ClapTrap() {
 	this->_name = "Default";
 	this->_hitPoints = FragTrap::_hitPoints;
 	this->_energyPoints = ScavTrap::_energyPoints;
@@ -14,8 +14,21 @@ DiamondTrap::DiamondTrap(const DiamondTrap& copy): ClapTrap(copy), ScavTrap(copy
 	std::cout << "Copy constructor called for DiamondTrap " << _name << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string name): ClapTrap(name + "_clap_trap") {
-	this->_name = name;
+DiamondTrap::DiamondTrap(std::string* name): ClapTrap(!name ? "Unknown_clap_trap" : (*name + "_clap_trap")) {
+	if (name == NULL || (*name).empty()) {
+		std::cout << "Invalid name entered for DiamondTrap, name set to \"Unknown\". ❌" << std::endl;
+		this->_name = "Unknown";
+	} else {
+		this->_name = *name;
+	}
+	this->_hitPoints = FragTrap::_hitPoints;
+	this->_energyPoints = ScavTrap::_energyPoints;
+	this->_attackDamage = FragTrap::_attackDamage;
+	std::cout << "Constructor called for DiamondTrap " << _name << std::endl;
+}
+
+DiamondTrap::DiamondTrap(std::string name): ClapTrap((!name.empty()) ? (name + "_clap_trap") : "Unknown_clap_trap") {
+	this->_name = (!name.empty()) ? name : "Unknown";
 	this->_hitPoints = FragTrap::_hitPoints;
 	this->_energyPoints = ScavTrap::_energyPoints;
 	this->_attackDamage = FragTrap::_attackDamage;

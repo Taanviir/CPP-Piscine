@@ -10,6 +10,7 @@ public:
 	DiamondTrap();
 	~DiamondTrap();
 	DiamondTrap(const DiamondTrap& copy);
+	DiamondTrap(std::string* name);
 	DiamondTrap(std::string name);
 
 	DiamondTrap& operator=(const DiamondTrap& copy);

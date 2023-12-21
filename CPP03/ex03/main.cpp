@@ -9,7 +9,7 @@ int main(void) {
 	// ClapTrap machine1("Jack");
 	// ScavTrap machine2("Mac");
 	// FragTrap machine3("Rex");
-	DiamondTrap machine4("Dax");
+	DiamondTrap machine4(NULL);
 
 	machine4.whoAmI();
 

@@ -8,6 +8,7 @@ public:
 	FragTrap();
 	~FragTrap();
 	FragTrap(const FragTrap& copy);
+	FragTrap(std::string* name);
 	FragTrap(std::string name);
 
 	FragTrap& operator=(const FragTrap& copy);
