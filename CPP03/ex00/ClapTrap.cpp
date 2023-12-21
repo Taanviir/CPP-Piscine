@@ -56,15 +56,31 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& copy) {
 	return *this;
 }
 
-void ClapTrap::attack(const std::string& target) {
-	if (_energyPoints == 0) {
+void ClapTrap::attack(const std::string* target) {
+	if (target == NULL || (*target).empty()) {
+		std::cout << "ClapTrap " << _name << " cannot attack due to invalid target. ❌" << std::endl;
+		return;
+	} else if (_energyPoints == 0) {
 		std::cout << "ClapTrap " << _name << " cannot attack due to insufficient energy points. 😴" << std::endl;
 		return;
 	} else if (_hitPoints == 0) {
 		std::cout << "ClapTrap " << _name << " has fallen. ☠️" << std::endl;
 		return;
-	} else if (target.empty()) {
+	}
+
+	std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage! ⚔️" << std::endl;
+	_energyPoints--;
+}
+
+void ClapTrap::attack(const std::string& target) {
+	if (target.empty()) {
 		std::cout << "ClapTrap " << _name << " cannot attack due to invalid target. ❌" << std::endl;
+		return;
+	} else if (_energyPoints == 0) {
+		std::cout << "ClapTrap " << _name << " cannot attack due to insufficient energy points. 😴" << std::endl;
+		return;
+	} else if (_hitPoints == 0) {
+		std::cout << "ClapTrap " << _name << " has fallen. ☠️" << std::endl;
 		return;
 	}
 

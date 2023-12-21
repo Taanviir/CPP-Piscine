@@ -10,6 +10,7 @@ int main(void) {
 	machine1.attack("f");
 	machine2.takeDamage(0);
 	machine2.beRepaired(0);
+	machine3.attack(NULL);
 
 	return 0;
 }
