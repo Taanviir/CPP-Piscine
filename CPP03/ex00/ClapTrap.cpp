@@ -14,10 +14,10 @@ ClapTrap::~ClapTrap() {
 }
 
 ClapTrap::ClapTrap(const ClapTrap& copy) {
-	_name = copy._name;
-	_hitPoints = copy._hitPoints;
-	_energyPoints = copy._energyPoints;
-	_attackDamage = copy._attackDamage;
+	this->_name = copy._name;
+	this->_hitPoints = copy._hitPoints;
+	this->_energyPoints = copy._energyPoints;
+	this->_attackDamage = copy._attackDamage;
 	std::cout << "Copy constructor called for ClapTrap " << _name << std::endl;
 }
 
