@@ -14,7 +14,7 @@ ScavTrap::~ScavTrap() {
 }
 
 ScavTrap::ScavTrap(const ScavTrap& copy): ClapTrap(copy) {
-	_guardMode = copy._guardMode;
+	this->_guardMode = copy._guardMode;
 	std::cout << "Copy constructor called for ScavTrap " << _name << std::endl;
 }
 

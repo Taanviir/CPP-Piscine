@@ -14,11 +14,25 @@ ScavTrap::~ScavTrap() {
 }
 
 ScavTrap::ScavTrap(const ScavTrap& copy): ClapTrap(copy) {
-	_guardMode = copy._guardMode;
+	this->_guardMode = copy._guardMode;
 	std::cout << "Copy constructor called for ScavTrap " << _name << std::endl;
 }
 
+ScavTrap::ScavTrap(std::string* name): ClapTrap(name) {
+	if (name == NULL || (*name).empty()) {
+		std::cout << "Invalid name entered for ScavTrap, name set to \"Unknown\". ❌" << std::endl;
+	}
+	_hitPoints = 100;
+	_energyPoints = 50;
+	_attackDamage = 20;
+	_guardMode = false;
+	std::cout << "Constructor called for ScavTrap " << _name << std::endl;
+}
+
 ScavTrap::ScavTrap(std::string name): ClapTrap(name) {
+	if (name.empty()) {
+		std::cout << "Invalid name entered for ScavTrap, name set to \"Unknown\". ❌" << std::endl;
+	}
 	_hitPoints = 100;
 	_energyPoints = 50;
 	_attackDamage = 20;
@@ -36,6 +50,22 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& copy) {
 	return *this;
 }
 
+void ScavTrap::attack(const std::string* target) {
+	if (target == NULL || (*target).empty()) {
+		std::cout << "ScavTrap " << _name << " cannot attack due to invalid target. ❌" << std::endl;
+		return;
+	} else if (_energyPoints == 0) {
+		std::cout << "ScavTrap " << _name << " cannot attack due to insufficient energy points. 😴" << std::endl;
+		return;
+	} else if (_hitPoints == 0) {
+		std::cout << "ScavTrap " << _name << " has fallen. ☠️" << std::endl;
+		return;
+	} 
+
+	std::cout << "ScavTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage! ⚔️" << std::endl;
+	_energyPoints--;
+}
+
 void ScavTrap::attack(const std::string& target) {
 	if (_energyPoints == 0) {
 		std::cout << "ScavTrap " << _name << " cannot attack due to insufficient energy points. 😴" << std::endl;
@@ -43,11 +73,15 @@ void ScavTrap::attack(const std::string& target) {
 	} else if (_hitPoints == 0) {
 		std::cout << "ScavTrap " << _name << " has fallen. ☠️" << std::endl;
 		return;
+	} else if (target.empty()) {
+		std::cout << "ScavTrap " << _name << " cannot attack due to invalid target. ❌" << std::endl;
+		return;
 	}
 
 	std::cout << "ScavTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage! ⚔️" << std::endl;
 	_energyPoints--;
 }
+
 void ScavTrap::guardGate(void) {
 	if (_guardMode == true) {
 		std::cout << "ScavTrap " << _name << " has already been guarding the gate! 😤" << std::endl;

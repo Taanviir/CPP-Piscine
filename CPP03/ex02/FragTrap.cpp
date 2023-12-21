@@ -16,7 +16,20 @@ FragTrap::FragTrap(const FragTrap& copy): ClapTrap(copy) {
 	std::cout << "Copy constructor called for FragTrap " << _name << std::endl;
 }
 
+FragTrap::FragTrap(std::string* name): ClapTrap(name) {
+	if (name == NULL || (*name).empty()) {
+		std::cout << "Invalid name entered for FragTrap, name set to \"Unknown\". ❌" << std::endl;
+	}
+	_hitPoints = 100;
+	_energyPoints = 100;
+	_attackDamage = 30;
+	std::cout << "Constructor called for FragTrap " << _name << std::endl;
+}
+
 FragTrap::FragTrap(std::string name): ClapTrap(name) {
+	if (name.empty()) {
+		std::cout << "Invalid name entered for FragTrap, name set to \"Unknown\". ❌" << std::endl;
+	}
 	_hitPoints = 100;
 	_energyPoints = 100;
 	_attackDamage = 30;
