@@ -12,6 +12,7 @@ public:
 	Animal& operator=(const Animal& copy);
 
 	std::string getType(void) const;
+
 	virtual void makeSound(void) const;
 
 protected:

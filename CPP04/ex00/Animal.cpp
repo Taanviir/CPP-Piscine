@@ -11,7 +11,7 @@ Animal::~Animal() {
 }
 
 Animal::Animal(const Animal& copy) {
-	std::cout << "Animal Copy constructor called." << std::endl;
+	std::cout << "Animal copy constructor called." << std::endl;
 	_type = copy._type;
 }
 

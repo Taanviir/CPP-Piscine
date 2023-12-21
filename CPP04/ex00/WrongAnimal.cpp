@@ -11,7 +11,7 @@ WrongAnimal::~WrongAnimal() {
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal& copy) {
-	std::cout << "Wrong Animal Copy constructor called." << std::endl;
+	std::cout << "Wrong Animal copy constructor called." << std::endl;
 	_type = copy._type;
 }
 
