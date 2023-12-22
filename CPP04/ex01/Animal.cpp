@@ -1,8 +1,9 @@
 #include "Animal.hpp"
 #include <iostream>
 
-Animal::Animal(): type("none") {
+Animal::Animal() {
 	std::cout << "Default Animal constructor called." << std::endl;
+	_type = "No Type";
 }
 
 Animal::~Animal() {
@@ -10,24 +11,36 @@ Animal::~Animal() {
 }
 
 Animal::Animal(const Animal& copy) {
-	*this = copy;
-	std::cout << "Animal Copy constructor called." << std::endl;
+	std::cout << "Animal copy constructor called." << std::endl;
+	this->_type = copy._type;
 }
 
 Animal& Animal::operator=(const Animal& copy) {
 	std::cout << "Animal copy assignment operator called." << std::endl;
-	if (this == &copy) return *this;
-
-	this->type = copy.type;
+	this->_type = copy._type;
 	return *this;
 }
 
 std::string Animal::getType(void) const {
-	return type;
+	return _type;
+}
+
+void Animal::setType(const std::string* newType) {
+	if (!newType || (*newType).empty()) {
+		std::cout << "Invalid type entered, type set to \"No Type\"." << std::endl;
+		_type = "No Type";
+		return;
+	}
+	_type = *newType;
 }
 
 void Animal::setType(const std::string& newType) {
-	type = newType;
+	if (newType.empty()) {
+		std::cout << "Invalid type entered, type set to \"No Type\"." << std::endl;
+		_type = "No Type";
+		return;
+	}
+	_type = newType;
 }
 
 void Animal::makeSound(void) const {

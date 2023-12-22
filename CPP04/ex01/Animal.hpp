@@ -12,11 +12,13 @@ public:
 	Animal& operator=(const Animal& copy);
 
 	std::string getType(void) const;
+	void setType(const std::string* newType);
 	void setType(const std::string& newType);
+
 	virtual void makeSound(void) const;
 
 protected:
-	std::string type;
+	std::string _type;
 };
 
 #endif // ANIMAL_HPP
