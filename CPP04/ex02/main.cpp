@@ -4,13 +4,14 @@
 
 int main()
 {
-	const AAnimal* j = new Dog();
-	const AAnimal* i = new Cat();
-
-	delete j; //should not create a leak
-	delete i;
-
 	// AAnimal a; --> this does not work due to AAnimal being an Abstract class
+
+	// Pointers to AAnimal is fine as the object of AAnimal isn't being instantiated
+	const AAnimal* dog = new Dog();
+	const AAnimal* cat = new Cat();
+
+	delete dog;
+	delete cat;
 
 	return 0;
 }
