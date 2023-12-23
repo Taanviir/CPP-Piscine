@@ -4,13 +4,13 @@
 
 int main()
 {
-    const AAnimal* j = new Dog();
-    const AAnimal* i = new Cat();
+	const AAnimal* j = new Dog();
+	const AAnimal* i = new Cat();
 
-    delete j; //should not create a leak
-    delete i;
+	delete j; //should not create a leak
+	delete i;
 
-    // AAnimal a; --> this does not work due to AAnimal being an Abstract class
+	// AAnimal a; --> this does not work due to AAnimal being an Abstract class
 
-    return 0;
+	return 0;
 }
