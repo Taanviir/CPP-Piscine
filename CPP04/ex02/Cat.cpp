@@ -1,16 +1,12 @@
 #include "Cat.hpp"
 #include <iostream>
-#include <cstdio>
-#include <cstdlib>
 
 Cat::Cat(): AAnimal() {
 	std::cout << "Default Cat constructor called." << std::endl;
-	type = "Cat";
+	_type = "Cat";
 	_brains = new Brain();
-	if (!_brains) {
-		perror("Brain allocation failed.");
-		exit(1);
-	}
+	if (!_brains)
+		throw std::runtime_error("Brain allocation failed.");
 }
 
 Cat::~Cat() {
@@ -19,20 +15,21 @@ Cat::~Cat() {
 }
 
 Cat::Cat(const Cat& copy): AAnimal(copy) {
-	*this = copy;
-	std::cout << "Cat Copy constructor called." << std::endl;
+	std::cout << "Cat copy constructor called." << std::endl;
+	this->_type = copy._type;
+	this->_brains = new Brain();
+	if (!this->_brains)
+		throw std::runtime_error("Brain allocation failed.");
+	*this->_brains = *copy._brains;
 }
 
 Cat& Cat::operator=(const Cat& copy) {
 	std::cout << "Cat copy assignment operator called." << std::endl;
 	if (this == &copy) return *this;
-
-	this->type = copy.type;
+	this->_type = copy._type;
 	this->_brains = new Brain();
-	if (!this->_brains) {
-		perror("Brain allocation failed.");
-		exit(1);
-	}
+	if (!this->_brains)
+		throw std::runtime_error("Brain allocation failed.");
 	*this->_brains = *copy._brains;
 	return *this;
 }

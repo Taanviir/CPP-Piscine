@@ -1,16 +1,12 @@
 #include "Dog.hpp"
 #include <iostream>
-#include <cstdio>
-#include <cstdlib>
 
 Dog::Dog(): AAnimal() {
 	std::cout << "Default Dog constructor called." << std::endl;
-	type = "Dog";
+	_type = "Dog";
 	_brains = new Brain();
-	if (!_brains) {
-		perror("Brain allocation failed.");
-		exit(1);
-	}
+	if (!_brains)
+		throw std::runtime_error("Brain allocation failed.");
 }
 
 Dog::~Dog() {
@@ -19,20 +15,21 @@ Dog::~Dog() {
 }
 
 Dog::Dog(const Dog& copy): AAnimal(copy) {
-	*this = copy;
-	std::cout << "Dog Copy constructor called." << std::endl;
+	std::cout << "Dog copy constructor called." << std::endl;
+	this->_type = copy._type;
+	this->_brains = new Brain();
+	if (!this->_brains)
+		throw std::runtime_error("Brain allocation failed.");
+	*this->_brains = *copy._brains;
 }
 
 Dog& Dog::operator=(const Dog& copy) {
 	std::cout << "Dog copy assignment operator called." << std::endl;
 	if (this == &copy) return *this;
-
-	this->type = copy.type;
+	this->_type = copy._type;
 	this->_brains = new Brain();
-	if (!this->_brains) {
-		perror("Brain allocation failed.");
-		exit(1);
-	}
+	if (!this->_brains)
+		throw std::runtime_error("Brain allocation failed.");
 	*this->_brains = *copy._brains;
 	return *this;
 }
