@@ -63,7 +63,7 @@ def generate_makefile(output_path="./"):
         makefile.write("\t@c++ $(CPPFLAGS) -I./ -c $< -o $@\n")
         makefile.write("\t@echo $(BLUE_I)\"Compiling $<.\"$(RESET)\n\n")
         
-        makefile.write("valgrind : CPPFLAGS+=-g\n")
+        makefile.write("valgrind : CPPFLAGS+=-g3\n")
         makefile.write("valgrind : re\n")
         makefile.write("\t@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)\n\n")
         
