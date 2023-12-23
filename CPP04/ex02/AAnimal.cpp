@@ -1,8 +1,9 @@
 #include "AAnimal.hpp"
 #include <iostream>
 
-AAnimal::AAnimal(): type("none") {
+AAnimal::AAnimal() {
 	std::cout << "Default AAnimal constructor called." << std::endl;
+	_type = "No Type";
 }
 
 AAnimal::~AAnimal() {
@@ -10,26 +11,34 @@ AAnimal::~AAnimal() {
 }
 
 AAnimal::AAnimal(const AAnimal& copy) {
-	*this = copy;
-	std::cout << "AAnimal Copy constructor called." << std::endl;
+	std::cout << "AAnimal copy constructor called." << std::endl;
+	this->_type = copy._type;
 }
 
 AAnimal& AAnimal::operator=(const AAnimal& copy) {
 	std::cout << "AAnimal copy assignment operator called." << std::endl;
-	if (this == &copy) return *this;
-
-	this->type = copy.type;
+	this->_type = copy._type;
 	return *this;
 }
 
 std::string AAnimal::getType(void) const {
-	return type;
+	return _type;
+}
+
+void AAnimal::setType(const std::string* newType) {
+	if (!newType || (*newType).empty()) {
+		std::cout << "Invalid type entered, type set to \"No Type\"." << std::endl;
+		_type = "No Type";
+		return;
+	}
+	_type = *newType;
 }
 
 void AAnimal::setType(const std::string& newType) {
-	type = newType;
-}
-
-void AAnimal::makeSound(void) const {
-	std::cout << "Generic AAnimal sound!" << std::endl;
+	if (newType.empty()) {
+		std::cout << "Invalid type entered, type set to \"No Type\"." << std::endl;
+		_type = "No Type";
+		return;
+	}
+	_type = newType;
 }
