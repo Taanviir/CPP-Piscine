@@ -7,7 +7,7 @@
 class AMateria {
 public:
 	AMateria();
-	~AMateria();
+	virtual ~AMateria();
 	AMateria(const AMateria& copy);
 	AMateria(std::string const* type);
 	AMateria(std::string const& type);
