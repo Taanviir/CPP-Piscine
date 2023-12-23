@@ -12,7 +12,7 @@ public:
 	Brain& operator=(const Brain& copy);
 
 protected:
-	std::string ideas[100];
+	std::string _ideas[100];
 };
 
 #endif // BRAIN_HPP
