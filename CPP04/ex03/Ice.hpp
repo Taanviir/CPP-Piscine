@@ -3,7 +3,7 @@
 
 # include "AMateria.hpp"
 
-class Ice {
+class Ice: public AMateria {
 public:
 	Ice();
 	~Ice();
@@ -13,8 +13,6 @@ public:
 
 	AMateria* clone() const;
 	void use(ICharacter& target);
-
-private:
 
 };
 
