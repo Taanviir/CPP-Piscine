@@ -1,7 +1,11 @@
 #ifndef MATERIASOURCE_HPP
 # define MATERIASOURCE_HPP
 
-class MateriaSource {
+# include "AMateria.hpp"
+# include "IMateriaSource.hpp"
+# include <string>
+
+class MateriaSource: public IMateriaSource {
 public:
 	MateriaSource();
 	~MateriaSource();
@@ -9,7 +13,11 @@ public:
 
 	MateriaSource& operator=(const MateriaSource& copy);
 
+	void learnMateria(AMateria* materia);
+	AMateria* createMateria(std::string const& type);
+
 private:
+	AMateria* _materia[4];
 
 };
 
