@@ -2,33 +2,33 @@
 #include <iostream>
 
 AMateria::AMateria() {
-	std::cout << "AMateria default constructor called" << std::endl;
+	DEBUG_MESSAGE("AMateria default constructor called", MAGENTA);
 	_type = "No Type";
 }
 
 AMateria::~AMateria() {
-	std::cout << "AMateria destructor called" << std::endl;
+	DEBUG_MESSAGE("AMateria destructor called", MAGENTA);
 }
 
 AMateria::AMateria(const AMateria& copy) {
-	std::cout << "AMateria copy constructor called" << std::endl;
+	DEBUG_MESSAGE("AMateria copy constructor called", MAGENTA);
 	this->_type = copy._type;
 }
 
 AMateria::AMateria(std::string const* type) {
 	if (!type || (*type).empty()) {
-		std::cout << "AMateria constructor called for Invalid type, type set to \"No Type\"" << std::endl;
+		DEBUG_MESSAGE("AMateria constructor called for Invalid type, type set to \"No Type\"", MAGENTA);
 		_type = "No Type";
 		return;
 	}
-	std::cout << "AMateria constructor called for type " << *type << std::endl;
+	DEBUG_MESSAGE("AMateria constructor called for type " << *type, MAGENTA);
 	this->_type = *type;
 }
 
 AMateria::AMateria(std::string const& type) {
-	std::cout << "AMateria constructor called for " << type << std::endl;
+	DEBUG_MESSAGE("AMateria constructor called for " << type, MAGENTA);
 	if (type.empty()) {
-		std::cout << "Invalid type entered, type set to \"No Type\"" << std::endl;
+		DEBUG_MESSAGE("Invalid type entered, type set to \"No Type\"", MAGENTA);
 		_type = "No Type";
 		return;
 	}
@@ -36,7 +36,7 @@ AMateria::AMateria(std::string const& type) {
 }
 
 AMateria& AMateria::operator=(const AMateria& copy) {
-	std::cout << "AMateria assignment operator called" << std::endl;
+	DEBUG_MESSAGE("AMateria assignment operator called", MAGENTA);
 	this->_type = copy._type;
 	return *this;
 }
