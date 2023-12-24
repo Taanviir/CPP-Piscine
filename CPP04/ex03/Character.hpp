@@ -22,7 +22,8 @@ public:
 
 private:
 	std::string _name;
-	AMateria* _materias[4];
+	AMateria* _inventory[4];
+	AMateria* _unequippedInventory[MAX_UNEQUIPPED_INVENTORY];
 
 };
 

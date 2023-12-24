@@ -5,6 +5,8 @@
 # include "ICharacter.hpp"
 # include "debug.hpp"
 
+# define MAX_UNEQUIPPED_INVENTORY 2048
+
 class ICharacter;
 
 class AMateria {
