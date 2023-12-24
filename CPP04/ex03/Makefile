@@ -24,7 +24,7 @@ $(OBJ_DIR)%.o : %.cpp
 	@c++ $(CPPFLAGS) -I./ -c $< -o $@
 	@echo $(BLUE_I)"Compiling $<."$(RESET)
 
-valgrind : CPPFLAGS+=-g3
+valgrind : CPPFLAGS+=-g3 -DDEBUG
 valgrind : re
 	@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
