@@ -2,26 +2,27 @@
 #include <iostream>
 
 Ice::Ice() {
-	std::cout << "Ice default constructor called" << std::endl;
+	DEBUG_MESSAGE("Ice default constructor called", CYAN);
 	_type = "ice";
 }
 
 Ice::~Ice() {
-	std::cout << "Ice destructor called" << std::endl;
+	DEBUG_MESSAGE("Ice constructor called", CYAN);
 }
 
 Ice::Ice(const Ice& copy): AMateria(copy) {
-	std::cout << "Ice copy constructor called" << std::endl;
+	DEBUG_MESSAGE("Ice copy constructor called", CYAN);
 	this->_type = copy._type;
 }
 
 Ice& Ice::operator=(const Ice& copy) {
-	std::cout << "Ice assignation operator called" << std::endl;
+	DEBUG_MESSAGE("Ice copy assignment operator called", CYAN);
 	this->_type = copy._type;
 	return *this;
 }
 
 AMateria* Ice::clone() const {
+	DEBUG_MESSAGE("Cloning Ice...", CYAN);
 	return new Ice(*this);
 }
 
