@@ -18,7 +18,8 @@ public:
 	AMateria* createMateria(std::string const& type);
 
 private:
-	AMateria* _materia[4];
+	AMateria* _inventory[4];
+	AMateria * _unequippedInventory[MAX_UNEQUIPPED_INVENTORY];
 
 };
 
