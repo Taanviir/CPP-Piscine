@@ -28,7 +28,7 @@ valgrind : CPPFLAGS+=-g3
 valgrind : re
 	@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
-debug : CPPFLAGS+=-g3 -fsanitize=address
+debug : CPPFLAGS+=-g3 -fsanitize=address -DDEBUG
 debug : re
 	@./$(NAME)
 

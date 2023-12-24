@@ -3,6 +3,7 @@
 
 # include "AMateria.hpp"
 # include "ICharacter.hpp"
+# include "debug.hpp"
 
 class Character: public ICharacter {
 public:

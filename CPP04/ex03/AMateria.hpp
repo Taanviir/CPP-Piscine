@@ -3,6 +3,7 @@
 
 # include <string>
 # include "ICharacter.hpp"
+# include "debug.hpp"
 
 class ICharacter;
 
@@ -22,6 +23,7 @@ public:
 
 protected:
 	std::string _type;
+
 };
 
 #endif // AMATERIA_HPP

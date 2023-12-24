@@ -2,6 +2,7 @@
 # define CURE_HPP
 
 # include "AMateria.hpp"
+# include "debug.hpp"
 
 class Cure: public AMateria {
 public:

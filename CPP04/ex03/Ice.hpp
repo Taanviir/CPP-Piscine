@@ -2,6 +2,7 @@
 # define ICE_HPP
 
 # include "AMateria.hpp"
+# include "debug.hpp"
 
 class Ice: public AMateria {
 public:
