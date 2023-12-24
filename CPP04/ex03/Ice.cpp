@@ -7,7 +7,7 @@ Ice::Ice() {
 }
 
 Ice::~Ice() {
-	DEBUG_MESSAGE("Ice constructor called", BLUE);
+	DEBUG_MESSAGE("Ice destructor called", BLUE);
 }
 
 Ice::Ice(const Ice& copy): AMateria(copy) {
