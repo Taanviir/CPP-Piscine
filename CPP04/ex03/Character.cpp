@@ -94,6 +94,12 @@ void Character::equip(AMateria* m) {
 		}
 	}
 	std::cout << RED << "No empty slots available" << WHITE << std::endl;
+	for (int i = 0; i < MAX_UNEQUIPPED_INVENTORY; i++) {
+		if (!_unequippedInventory[i]) {
+			_unequippedInventory[i] = m;
+			return;
+		}
+	}
 }
 
 void Character::unequip(int idx) {

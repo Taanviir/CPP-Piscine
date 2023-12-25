@@ -45,6 +45,21 @@ void MateriaSource::learnMateria(AMateria* materia) {
 	std::cout << "Materia learned: " << YELLOW_B << materia->getType() << WHITE << std::endl;
 }
 
+AMateria* MateriaSource::createMateria(std::string const* type) {
+	if (!type) {
+		std::cout << RED << "Invalid Materia Entered" << WHITE << std::endl;
+		return NULL;
+	}
+	for (int i = 0; i < 4; i++) {
+		if (_inventory[i] && _inventory[i]->getType() == *type) {
+			std::cout << "Materia created: " << YELLOW_B << type << WHITE << std::endl;
+			return _inventory[i]->clone();
+		}
+	}
+	std::cout << RED << "Materia not found: " << WHITE << type << std::endl;
+	return NULL;
+}
+
 AMateria* MateriaSource::createMateria(std::string const& type) {
 	for (int i = 0; i < 4; i++) {
 		if (_inventory[i] && _inventory[i]->getType() == type) {
