@@ -13,9 +13,9 @@ int main(int argc, char const **argv) {
         const Animal* dog = new Dog();
         const Animal* cat = new Cat();
         std::cout << std::endl;
-        std::cout << meta->getType() << " " << std::endl;
-        std::cout << dog->getType() << " " << std::endl;
-        std::cout << cat->getType() << " " << std::endl;
+        std::cout << meta->getType() << std::endl;
+        std::cout << dog->getType() << std::endl;
+        std::cout << cat->getType() << std::endl;
         std::cout << std::endl;
         cat->makeSound(); //will output the cat sound!
         dog->makeSound();
@@ -25,15 +25,13 @@ int main(int argc, char const **argv) {
         delete cat;
         delete dog;
     } else {
-        const WrongAnimal* wrongAnimal = new WrongAnimal();
-        const WrongCat* wrongCat = new WrongCat();
+        const WrongAnimal* wrongCat = new WrongCat();
         std::cout << std::endl;
-        std::cout << wrongCat->getType() << " " << std::endl;
+        std::cout << wrongCat->getType() << std::endl;
         std::cout << std::endl;
         wrongCat->makeSound();
         std::cout << std::endl;
         delete wrongCat;
-        delete wrongAnimal;
     }
 
     return 0;

@@ -19,7 +19,6 @@ public:
 
 private:
 	AMateria* _inventory[4];
-	AMateria * _unequippedInventory[MAX_UNEQUIPPED_INVENTORY];
 
 };
 
