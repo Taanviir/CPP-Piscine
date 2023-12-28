@@ -13,12 +13,14 @@ public:
     Form& operator=(const Form& copy);
 
     // getters
-    std::string getName() const;
+    const std::string& getName() const;
     bool getSigned() const;
     int getGradeToSign() const;
     int getGradeToExecute() const;
 
+    // methods
     void beSigned(const Bureaucrat& bureaucrat);
+    void signForm(const Bureaucrat& bureaucrat);
 
     // exceptions
     class GradeTooHighException : public std::exception {
