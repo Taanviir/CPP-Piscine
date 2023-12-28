@@ -91,7 +91,7 @@ const std::string& Form::getName() const {
     return _name;
 }
 
-bool Form::getSigned() const {
+bool Form::getIsSigned() const {
     return _signed;
 }
 
@@ -111,16 +111,6 @@ void Form::beSigned(const Bureaucrat& bureaucrat) {
     _signed = true;
 }
 
-void Form::signForm(const Bureaucrat& bureaucrat) {
-    try {
-        beSigned(bureaucrat);
-        std::cout << bureaucrat.getName() << " signs " << _name << std::endl;
-    }
-    catch (std::exception& error) {
-        std::cout << bureaucrat.getName() << " cannot sign " << _name << " because " << error.what() << std::endl;
-    }
-}
-
 // exceptions
 const char* Form::GradeTooHighException::what() const throw() {
     return RED "Grade is too high" WHITE;
@@ -132,6 +122,6 @@ const char* Form::GradeTooLowException::what() const throw() {
 
 // overloading << operator
 std::ostream& operator<<(std::ostream& os, const Form& form) {
-    os << "Form " << form.getName() << " is " << (form.getSigned() ? "signed" : "not signed") << " and requires grade " << form.getGradeToSign() << " to sign and grade " << form.getGradeToExecute() << " to execute" << std::endl;
+    os << "Form " << YELLOW_B << form.getName() << WHITE << " is " << (form.getIsSigned() ? "signed" : "not signed") << " and requires grade " << form.getGradeToSign() << " to sign and grade " << form.getGradeToExecute() << " to execute" << std::endl;
     return os;
 }

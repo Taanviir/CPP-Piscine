@@ -2,6 +2,7 @@
 # define BUREAUCRAT_HPP
 
 # include <string>
+# include "Form.hpp"
 
 /* COLORS */
 # define WHITE "\e[0m"
@@ -20,6 +21,8 @@
 # define DEBUG_MESSAGE(message, color) do {} while(0)
 # endif
 
+class Form;
+
 class Bureaucrat {
 public:
     Bureaucrat();
@@ -34,6 +37,7 @@ public:
     int getGrade(void) const;
     void incrementGrade(void);
     void decrementGrade(void);
+    void signForm(Form& form);
 
     // exceptions
     class GradeTooHighException : public std::exception {

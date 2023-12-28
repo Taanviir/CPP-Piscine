@@ -4,6 +4,8 @@
 # include <string>
 # include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form {
 public:
     Form();
@@ -18,13 +20,12 @@ public:
 
     // getters
     const std::string& getName() const;
-    bool getSigned() const;
+    bool getIsSigned() const;
     int getGradeToSign() const;
     int getGradeToExecute() const;
 
     // methods
     void beSigned(const Bureaucrat& bureaucrat);
-    void signForm(const Bureaucrat& bureaucrat);
 
     // exceptions
     class GradeTooHighException : public std::exception {
