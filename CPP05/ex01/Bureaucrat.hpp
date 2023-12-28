@@ -7,12 +7,7 @@
 /* COLORS */
 # define WHITE "\e[0m"
 # define RED "\e[31m"
-# define GREEN "\e[32m"
 # define YELLOW_B "\e[1;33m"
-# define BLUE "\e[34m"
-# define CYAN "\e[36m"
-# define GRAY "\e[90m"
-# define WHITE_B "\e[1m"
 
 /* Printing Debug Message */
 # ifdef DEBUG
