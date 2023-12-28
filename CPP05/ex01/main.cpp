@@ -1,47 +1,53 @@
 #include <iostream>
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main() {
-    Bureaucrat b1("b1", 1);
-    Bureaucrat b2("b2", 150);
+    // Bureaucrats
+    Bureaucrat b1("bureaucrat1", 1);
+    Bureaucrat b2("bureaucrat2", 150);
 
-    // print
-    std::cout << b1 << std::endl;
-    std::cout << b2 << std::endl;
+    // Forms
+    Form f1("form1", 1, 1);
+    Form f2("form2", 150, 150);
 
-    // invalid grade
+    // Sign forms
+    b1.signForm(f1);
+    b2.signForm(f2);
+
+    // Print forms
+    std::cout << f1;
+    std::cout << f2;
+
+    // Try to sign forms with bureaucrats with too low grades
     try {
-        Bureaucrat b3("b3", 0);
-    } catch (std::exception& error) {
+        Form f3("form3", 0, 1);
+        std::cout << f3 << std::endl;
+    }
+    catch (std::exception& error) {
         std::cout << error.what() << std::endl;
     }
     try {
-        Bureaucrat b4("b4", 151);
-    } catch (std::exception& error) {
+        Form f4("form4", 1, 0);
+        std::cout << f4 << std::endl;
+    }
+    catch (std::exception& error) {
         std::cout << error.what() << std::endl;
     }
 
-    // increment grade
+    // Try to sign forms with bureaucrats with too high grades
     try {
-        b1.incrementGrade();
-    } catch (std::exception& error) {
+        Form f5("form5", 151, 1);
+        std::cout << f5 << std::endl;
+    }
+    catch (std::exception& error) {
         std::cout << error.what() << std::endl;
     }
     try {
-        b2.incrementGrade();
-    } catch (std::exception& error) {
-        std::cout << error.what() << std::endl;
+        Form f6("form6", 1, 151);
+        std::cout << f6 << std::endl;
     }
-
-    // decrement grade
-    try {
-        b1.decrementGrade();
-    } catch (std::exception& error) {
-        std::cout << error.what() << std::endl;
-    }
-    try {
-        b2.decrementGrade();
-    } catch (std::exception& error) {
+    catch (std::exception& error) {
         std::cout << error.what() << std::endl;
     }
 
