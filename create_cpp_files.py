@@ -14,7 +14,7 @@ def create_cpp_file(file_name, output_path="./"):
             file.write(f'# define {file_name.upper()[:-4]}_HPP\n\n')
             file.write(f'class {file_name[:-4]} {{\npublic:\n')
             if file_name[0].isupper():
-                file.write(f'\t{file_name[:-4]}();\n\t~{file_name[:-4]}();\n\t{file_name[:-4]}(const {file_name[:-4]}& copy);\n\n\t{file_name[:-4]}& operator=(const {file_name[:-4]}& copy);')
+                file.write(f'    {file_name[:-4]}();\n    ~{file_name[:-4]}();\n    {file_name[:-4]}(const {file_name[:-4]}& copy);\n\n    {file_name[:-4]}& operator=(const {file_name[:-4]}& copy);')
             file.write(f'\n\nprivate:\n\n}};\n\n')
             file.write(f'#endif // {file_name.upper()[:-4]}_HPP\n')
         elif file_name.endswith(".cpp"):
