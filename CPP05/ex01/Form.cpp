@@ -19,6 +19,65 @@ Form::Form(const Form& copy): _name(copy._name),
     DEBUG_MESSAGE("Form copy constructor called", GRAY);
 }
 
+Form::Form(const std::string* name, int gradeToSign, int gradeToExecute): _name(name && !name->empty() ? *name : "Default"),
+    _signed(false),
+    _gradeToSign(gradeToSign),
+    _gradeToExecute(gradeToExecute) {
+    DEBUG_MESSAGE("Form constructor called", GRAY);
+
+    if (*name == "Default") {
+        std::cout << "Invalid name entered, Form name set to default" << std::endl;
+    }
+
+    if (gradeToSign < 1 || gradeToExecute < 1) {
+        throw Form::GradeTooHighException();
+    }
+    else if (gradeToSign > 150 || gradeToExecute > 150) {
+        throw Form::GradeTooLowException();
+    }
+}
+
+Form::Form(const std::string& name, int gradeToSign, int gradeToExecute): _name(!name.empty() ? name : "Default"),
+    _signed(false),
+    _gradeToSign(gradeToSign),
+    _gradeToExecute(gradeToExecute) {
+    DEBUG_MESSAGE("Form constructor called", GRAY);
+
+    if (name == "Default") {
+        std::cout << "Invalid name entered, Form name set to default" << std::endl;
+    }
+
+    if (gradeToSign < 1 || gradeToExecute < 1) {
+        throw Form::GradeTooHighException();
+    }
+    else if (gradeToSign > 150 || gradeToExecute > 150) {
+        throw Form::GradeTooLowException();
+    }
+}
+
+Form::Form(std::string* name): _name(name && !name->empty() ? *name : "Default"),
+    _signed(false),
+    _gradeToSign(150),
+    _gradeToExecute(150) {
+    DEBUG_MESSAGE("Form constructor called", GRAY);
+
+    if (*name == "Default") {
+        std::cout << "Invalid name entered, Form name set to default" << std::endl;
+    }
+}
+
+Form::Form(const std::string& name): _name(!name.empty() ? name : "Default"),
+    _signed(false),
+    _gradeToSign(150),
+    _gradeToExecute(150) {
+    DEBUG_MESSAGE("Form constructor called", GRAY);
+
+    if (name == "Default") {
+        std::cout << "Invalid name entered, Form name set to default" << std::endl;
+    }
+}
+
+// overloading = operator
 Form& Form::operator=(const Form& copy) {
     DEBUG_MESSAGE("Form assignation operator called", GRAY);
     if (this != &copy) {
@@ -71,6 +130,7 @@ const char* Form::GradeTooLowException::what() const throw() {
     return RED "Grade is too low" WHITE;
 }
 
+// overloading << operator
 std::ostream& operator<<(std::ostream& os, const Form& form) {
     os << "Form " << form.getName() << " is " << (form.getSigned() ? "signed" : "not signed") << " and requires grade " << form.getGradeToSign() << " to sign and grade " << form.getGradeToExecute() << " to execute" << std::endl;
     return os;

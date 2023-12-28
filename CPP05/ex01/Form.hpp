@@ -9,6 +9,10 @@ public:
     Form();
     ~Form();
     Form(const Form& copy);
+    Form(const std::string* name, int gradeToSign, int gradeToExecute);
+    Form(const std::string& name, int gradeToSign, int gradeToExecute);
+    Form(std::string* name);
+    Form(const std::string& name);
 
     Form& operator=(const Form& copy);
 
