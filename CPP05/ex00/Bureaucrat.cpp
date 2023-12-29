@@ -1,7 +1,9 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
 
-Bureaucrat::Bureaucrat(): _name("Default"), _grade(150) {
+Bureaucrat::Bureaucrat():
+    _name("Default"),
+    _grade(150) {
     DEBUG_MESSAGE("Bureaucrat default constructor called", BLUE);
 }
 
@@ -9,15 +11,23 @@ Bureaucrat::~Bureaucrat() {
     DEBUG_MESSAGE("Bureaucrat destructor called for " << _name, BLUE);
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& copy) : _name(copy._name), _grade(copy._grade) {
+Bureaucrat::Bureaucrat(const Bureaucrat& copy):
+    _name(copy._name),
+    _grade(copy._grade) {
     DEBUG_MESSAGE("Bureaucrat copy constructor called", BLUE);
 }
 
-Bureaucrat::Bureaucrat(std::string const& name): _name(name), _grade(150) {
+Bureaucrat::Bureaucrat(const std::string& name):
+    _name(name.empty() ? "Default" : name),
+    _grade(150) {
     DEBUG_MESSAGE("Bureaucrat name constructor called", BLUE);
+    if (_name.empty())
+        std::cout << RED "Bureaucrat name cannot be empty, setting name to \"Default\"" WHITE << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string const& name, int const grade): _name(name), _grade(grade) {
+Bureaucrat::Bureaucrat(const std::string& name, const int grade):
+    _name(name.empty() ? "Default" : name),
+    _grade(grade) {
     DEBUG_MESSAGE("Bureaucrat name and grade constructor called", BLUE);
     if (_grade < 1)
         throw Bureaucrat::GradeTooHighException();
@@ -25,7 +35,7 @@ Bureaucrat::Bureaucrat(std::string const& name, int const grade): _name(name), _
         throw Bureaucrat::GradeTooLowException();
 }
 
-Bureaucrat &Bureaucrat::operator=(const Bureaucrat &copy) {
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat& copy) {
     DEBUG_MESSAGE("Bureaucrat copy assignment operator called", BLUE);
     _grade = copy._grade;
     return *this;
