@@ -11,10 +11,8 @@ public:
     AForm();
     virtual ~AForm();
     AForm(const AForm& copy);
-    AForm(const std::string* name, int gradeToSign, int gradeToExecute);
-    AForm(const std::string& name, int gradeToSign, int gradeToExecute);
-    AForm(std::string* name);
     AForm(const std::string& name);
+    AForm(const std::string& name, int gradeToSign, int gradeToExecute);
 
     AForm& operator=(const AForm& copy);
 
@@ -26,6 +24,7 @@ public:
 
     // methods
     void beSigned(const Bureaucrat& bureaucrat);
+    virtual void execute(Bureaucrat const & executor) const = 0;
 
     // exceptions
     class GradeTooHighException : public std::exception {
@@ -42,9 +41,8 @@ private:
     bool _signed;
     int const _gradeToSign;
     int const _gradeToExecute;
-
 };
 
-std::ostream& operator<<(std::ostream& os, const AForm& form);
+std::ostream& operator<<(std::ostream& os, const AForm& Aform);
 
-#endif // FORM_HPP
+#endif // AFORM_HPP

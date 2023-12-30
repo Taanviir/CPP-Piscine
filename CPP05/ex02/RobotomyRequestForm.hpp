@@ -1,13 +1,17 @@
 #ifndef ROBOTOMYREQUESTFORM_HPP
 # define ROBOTOMYREQUESTFORM_HPP
 
-class RobotomyRequestForm {
-public:
-	RobotomyRequestForm();
-	~RobotomyRequestForm();
-	RobotomyRequestForm(const RobotomyRequestForm& copy);
+# include "AForm.hpp"
 
-	RobotomyRequestForm& operator=(const RobotomyRequestForm& copy);
+class RobotomyRequestForm: public AForm {
+public:
+    RobotomyRequestForm();
+    ~RobotomyRequestForm();
+    RobotomyRequestForm(const RobotomyRequestForm& copy);
+
+    RobotomyRequestForm& operator=(const RobotomyRequestForm& copy);
+
+    virtual void execute(Bureaucrat const & executor) const;
 
 private:
 

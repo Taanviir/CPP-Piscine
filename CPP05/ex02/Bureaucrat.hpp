@@ -2,7 +2,7 @@
 # define BUREAUCRAT_HPP
 
 # include <string>
-# include "Form.hpp"
+# include "AForm.hpp"
 
 /* COLORS */
 # define WHITE "\e[0m"
@@ -16,36 +16,40 @@
 # define DEBUG_MESSAGE(message, color) do {} while(0)
 # endif
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 public:
     Bureaucrat();
     ~Bureaucrat();
     Bureaucrat(const Bureaucrat& copy);
-    Bureaucrat(std::string const& name);
-    Bureaucrat(std::string const& name, int const grade);
+    Bureaucrat(const std::string& name);
+    Bureaucrat(const std::string& name, const int grade);
 
     Bureaucrat& operator=(const Bureaucrat& copy);
 
-    const std::string getName(void) const;
+    // getters
+    const std::string& getName(void) const;
     int getGrade(void) const;
+
+    // methods
     void incrementGrade(void);
     void decrementGrade(void);
-    void signForm(Form& form);
+    void signForm(AForm& form);
+    void executeForm(AForm const & form);
 
     // exceptions
-    class GradeTooHighException : public std::exception {
+    class GradeTooHighException: public std::exception {
     public:
         virtual const char* what() const throw();
     };
-    class GradeTooLowException : public std::exception {
+    class GradeTooLowException: public std::exception {
     public:
         virtual const char* what() const throw();
     };
 
 private:
-    std::string const _name;
+    const std::string _name;
     int _grade;
 };
 
