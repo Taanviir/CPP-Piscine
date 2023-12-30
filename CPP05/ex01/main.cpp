@@ -15,11 +15,21 @@ int main() {
     b1.signForm(f1);
     b2.signForm(f2);
 
+    // Try to sign forms with bureaucrats with too low grades
+    try {
+        Bureaucrat b3("bureaucrat3", 100);
+        Form f3("form3", 20, 20);
+        b3.signForm(f1);
+    }
+    catch (std::exception& error) {
+        std::cout << error.what() << std::endl;
+    }
+
     // Print forms
     std::cout << f1;
     std::cout << f2;
 
-    // Try to sign forms with bureaucrats with too low grades
+    // Try to create forms with too high or too low grades
     try {
         Form f3("form3", 0, 1);
         std::cout << f3 << std::endl;
@@ -34,8 +44,6 @@ int main() {
     catch (std::exception& error) {
         std::cout << error.what() << std::endl;
     }
-
-    // Try to sign forms with bureaucrats with too high grades
     try {
         Form f5("form5", 151, 1);
         std::cout << f5 << std::endl;
