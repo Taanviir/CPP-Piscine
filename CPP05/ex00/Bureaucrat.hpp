@@ -25,7 +25,7 @@ public:
 
     Bureaucrat& operator=(const Bureaucrat& copy);
 
-    const std::string getName(void) const;
+    const std::string& getName(void) const;
     int getGrade(void) const;
     void incrementGrade(void);
     void decrementGrade(void);
@@ -41,7 +41,7 @@ public:
     };
 
 private:
-    std::string const _name;
+    const std::string _name;
     int _grade;
 };
 
