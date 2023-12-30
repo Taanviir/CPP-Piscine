@@ -54,7 +54,7 @@ Form::Form(const std::string& name, int gradeToSign, int gradeToExecute):
 
 // overloading = operator
 Form& Form::operator=(const Form& copy) {
-    DEBUG_MESSAGE("Form assignation operator called", GRAY);
+    DEBUG_MESSAGE("Form copy assignment operator called", GRAY);
     if (this != &copy) {
         _signed = copy._signed;
     }
