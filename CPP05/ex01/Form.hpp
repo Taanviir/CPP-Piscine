@@ -11,10 +11,8 @@ public:
     Form();
     ~Form();
     Form(const Form& copy);
-    Form(const std::string* name, int gradeToSign, int gradeToExecute);
-    Form(const std::string& name, int gradeToSign, int gradeToExecute);
-    Form(std::string* name);
     Form(const std::string& name);
+    Form(const std::string& name, int gradeToSign, int gradeToExecute);
 
     Form& operator=(const Form& copy);
 
@@ -42,7 +40,6 @@ private:
     bool _signed;
     int const _gradeToSign;
     int const _gradeToExecute;
-
 };
 
 std::ostream& operator<<(std::ostream& os, const Form& form);
