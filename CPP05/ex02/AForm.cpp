@@ -96,7 +96,7 @@ const char* AForm::GradeTooLowException::what() const throw() {
 }
 
 const char* AForm::FormNotSignedException::what() const throw() {
-    return RED "The form has not been signed!" WHITE;
+    return RED "this form has not been signed!" WHITE;
 }
 
 // overloading << operator
