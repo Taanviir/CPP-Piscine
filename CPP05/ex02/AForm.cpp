@@ -95,6 +95,10 @@ const char* AForm::GradeTooLowException::what() const throw() {
     return RED "Bureaucrat grade is too low" WHITE;
 }
 
+const char* AForm::FormNotSignedException::what() const throw() {
+    return RED "The form has not been signed!" WHITE;
+}
+
 // overloading << operator
 std::ostream& operator<<(std::ostream& os, const AForm& form) {
     os << "Form " << YELLOW_B << form.getName() << WHITE
