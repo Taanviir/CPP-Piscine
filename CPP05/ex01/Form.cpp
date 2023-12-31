@@ -3,7 +3,7 @@
 
 Form::Form():
     _name("Default"),
-    _signed(false),
+    _signedStatus(false),
     _gradeToSign(150),
     _gradeToExecute(150) {
     DEBUG_MESSAGE("Form default constructor called", GRAY);
@@ -15,7 +15,7 @@ Form::~Form() {
 
 Form::Form(const Form& copy):
     _name(copy._name),
-    _signed(copy._signed),
+    _signedStatus(copy._signedStatus),
     _gradeToSign(copy._gradeToSign),
     _gradeToExecute(copy._gradeToExecute) {
     DEBUG_MESSAGE("Form copy constructor called", GRAY);
@@ -23,7 +23,7 @@ Form::Form(const Form& copy):
 
 Form::Form(const std::string& name):
     _name(name.empty() ? "Default" : name),
-    _signed(false),
+    _signedStatus(false),
     _gradeToSign(150),
     _gradeToExecute(150) {
     DEBUG_MESSAGE("Form constructor called", GRAY);
@@ -35,7 +35,7 @@ Form::Form(const std::string& name):
 
 Form::Form(const std::string& name, int gradeToSign, int gradeToExecute):
     _name(name.empty() ? "Default" : name),
-    _signed(false),
+    _signedStatus(false),
     _gradeToSign(gradeToSign),
     _gradeToExecute(gradeToExecute) {
     DEBUG_MESSAGE("Form constructor called", GRAY);
@@ -56,7 +56,7 @@ Form::Form(const std::string& name, int gradeToSign, int gradeToExecute):
 Form& Form::operator=(const Form& copy) {
     DEBUG_MESSAGE("Form copy assignment operator called", GRAY);
     if (this != &copy) {
-        _signed = copy._signed;
+        _signedStatus = copy._signedStatus;
     }
     return *this;
 }
@@ -66,8 +66,8 @@ const std::string& Form::getName() const {
     return _name;
 }
 
-bool Form::getIsSigned() const {
-    return _signed;
+bool Form::getSignedStatus() const {
+    return _signedStatus;
 }
 
 int Form::getGradeToSign() const {
@@ -83,7 +83,7 @@ void Form::beSigned(const Bureaucrat& bureaucrat) {
     if (bureaucrat.getGrade() > _gradeToSign) {
         throw Form::GradeTooLowException();
     }
-    _signed = true;
+    _signedStatus = true;
 }
 
 // exceptions
@@ -98,7 +98,7 @@ const char* Form::GradeTooLowException::what() const throw() {
 // overloading << operator
 std::ostream& operator<<(std::ostream& os, const Form& form) {
     os << "Form " << YELLOW_B << form.getName() << WHITE
-    << " is " << (form.getIsSigned() ? "signed" : "not signed")
+    << " is " << (form.getSignedStatus() ? "signed" : "not signed")
     << " and requires grade " << form.getGradeToSign() << " to sign and grade "
     << form.getGradeToExecute() << " to execute" << std::endl;
     return os;

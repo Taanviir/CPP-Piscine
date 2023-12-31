@@ -15,7 +15,7 @@ public:
 
     // getters
     const std::string& getName() const;
-    bool getIsSigned() const;
+    bool getSignedStatus() const;
     int getGradeToSign() const;
     int getGradeToExecute() const;
 
@@ -39,7 +39,7 @@ public:
 
 private:
     std::string const _name;
-    bool _signed;
+    bool _signedStatus;
     int const _gradeToSign;
     int const _gradeToExecute;
 
