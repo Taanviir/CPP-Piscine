@@ -55,29 +55,29 @@ def generate_makefile(output_path="./"):
         makefile.write("all : $(NAME)\n\n")
         
         makefile.write("$(NAME) : $(OBJS)\n")
-        makefile.write("\t@c++ $(CPPFLAGS) $(OBJS) -o $@\n")
-        makefile.write("\t@echo $(GREEN_B)$(NAME)$(RESET)\" is ready. ✅\\n\"\n\n")
+        makefile.write("    @c++ $(CPPFLAGS) $(OBJS) -o $@\n")
+        makefile.write("    @echo $(GREEN_B)$(NAME)$(RESET)\" is ready. ✅\\n\"\n\n")
         
         makefile.write("$(OBJ_DIR)%.o : %.cpp\n")
-        makefile.write("\t@mkdir -p $(OBJ_DIR)\n")
-        makefile.write("\t@c++ $(CPPFLAGS) -I./ -c $< -o $@\n")
-        makefile.write("\t@echo $(BLUE_I)\"Compiling $<.\"$(RESET)\n\n")
+        makefile.write("    @mkdir -p $(OBJ_DIR)\n")
+        makefile.write("    @c++ $(CPPFLAGS) -I./ -c $< -o $@\n")
+        makefile.write("    @echo $(BLUE_I)\"Compiling $<.\"$(RESET)\n\n")
         
         makefile.write("valgrind : CPPFLAGS+=-g3 -DDEBUG\n")
         makefile.write("valgrind : re\n")
-        makefile.write("\t@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)\n\n")
+        makefile.write("    @valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)\n\n")
         
         makefile.write("debug : CPPFLAGS+=-g3 -fsanitize=address -DDEBUG\n")
         makefile.write("debug : re\n")
-        makefile.write("\t@./$(NAME)\n\n")
+        makefile.write("    @./$(NAME)\n\n")
         
         makefile.write("clean :\n")
-        makefile.write("\t@rm -rf $(OBJ_DIR)\n")
-        makefile.write("\t@echo $(RED_B)\"Object files removed.\"$(RESET)\n\n")
+        makefile.write("    @rm -rf $(OBJ_DIR)\n")
+        makefile.write("    @echo $(RED_B)\"Object files removed.\"$(RESET)\n\n")
         
         makefile.write("fclean : clean\n")
-        makefile.write("\t@rm -f $(NAME)\n")
-        makefile.write("\t@echo $(RED_B)\"$(NAME) removed.\\n\"$(RESET)\n\n")
+        makefile.write("    @rm -f $(NAME)\n")
+        makefile.write("    @echo $(RED_B)\"$(NAME) removed.\\n\"$(RESET)\n\n")
         
         makefile.write("re : fclean all\n\n")
         
