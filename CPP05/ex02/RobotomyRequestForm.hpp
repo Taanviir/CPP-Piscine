@@ -5,16 +5,17 @@
 
 class RobotomyRequestForm: public AForm {
 public:
-    RobotomyRequestForm();
     ~RobotomyRequestForm();
     RobotomyRequestForm(const RobotomyRequestForm& copy);
-
-    RobotomyRequestForm& operator=(const RobotomyRequestForm& copy);
+    RobotomyRequestForm(const std::string& target);
 
     virtual void execute(Bureaucrat const & executor) const;
 
 private:
+    const std::string _target;
 
+    RobotomyRequestForm();
+    RobotomyRequestForm& operator=(const RobotomyRequestForm& copy);
 };
 
 #endif // ROBOTOMYREQUESTFORM_HPP
