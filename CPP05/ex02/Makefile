@@ -24,11 +24,11 @@ $(OBJ_DIR)%.o : %.cpp
 	@c++ $(CPPFLAGS) -I./ -c $< -o $@
 	@echo $(BLUE_I)"Compiling $<."$(RESET)
 
-valgrind : CPPFLAGS+=-g3
+valgrind : CPPFLAGS+=-g3 -DDEBUG
 valgrind : re
 	@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
-debug : CPPFLAGS+=-g3 -fsanitize=address
+debug : CPPFLAGS+=-g3 -fsanitize=address -DDEBUG
 debug : re
 	@./$(NAME)
 
@@ -37,7 +37,7 @@ clean :
 	@echo $(RED_B)"Object files removed."$(RESET)
 
 fclean : clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) *_shrubbery
 	@echo $(RED_B)"$(NAME) removed.\n"$(RESET)
 
 re : fclean all
