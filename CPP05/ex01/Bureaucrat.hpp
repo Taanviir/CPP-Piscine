@@ -8,6 +8,8 @@
 # define WHITE "\e[0m"
 # define RED "\e[31m"
 # define YELLOW_B "\e[1;33m"
+# define BLUE "\e[34m"
+# define GRAY "\e[90m"
 
 /* Printing Debug Message */
 # ifdef DEBUG
