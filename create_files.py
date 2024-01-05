@@ -1,32 +1,16 @@
+"""
+This script file creates C++ class files in the orthodox canonical form.
+
+Usage: python3 create_files.py [output_path]
+
+Program loop:
+Ask what the user wants to create (Makefile, C++ class, debug file, main)
+Create the files
+Ask if the user wants to create more files (repeat loop basically)
+"""
+
 import os
 import sys
-
-def create_cpp_file(file_name, output_path="./"):
-    if output_path != "./":
-        file_path = os.path.join(output_path, file_name)
-    else:
-        file_path = file_name
-
-    with open(file_path, 'w') as file:
-        if file_name.endswith(".hpp"):
-            # Header file
-            file.write(f'#ifndef {file_name.upper()[:-4]}_HPP\n')
-            file.write(f'# define {file_name.upper()[:-4]}_HPP\n\n')
-            file.write(f'class {file_name[:-4]} {{\npublic:\n')
-            if file_name[0].isupper():
-                file.write(f'    {file_name[:-4]}();\n    ~{file_name[:-4]}();\n    {file_name[:-4]}(const {file_name[:-4]}& copy);\n\n    {file_name[:-4]}& operator=(const {file_name[:-4]}& copy);')
-            file.write(f'\n\nprivate:\n\n}};\n\n')
-            file.write(f'#endif // {file_name.upper()[:-4]}_HPP\n')
-        elif file_name.endswith(".cpp"):
-            # Source file
-            if file_name == "main.cpp":
-                file.write('#include <iostream>\n\n')
-                file.write('int main() {\n    // Your code here\n    return 0;\n}\n')
-            else:
-                file.write('#include ')
-                file.write(f'"{file_name[:-4]}.hpp"\n\n')
-        else:
-            print(f"Unsupported file type: {file_name}")
 
 def generate_makefile(output_path="./"):
     if output_path != "./":
@@ -83,27 +67,105 @@ def generate_makefile(output_path="./"):
         
         makefile.write(".PHONY : all clean fclean re\n")
 
+def create_cpp_class(output_path="./"):
+    class_name = input("Enter the name of the class: ")
+    if output_path != "./":
+        file_path = os.path.join(output_path, class_name)
+
+    with open(f"{file_path}.hpp", 'w') as hpp_file:
+        hpp_file.write(f"#ifndef {class_name.upper()}_HPP\n")
+        hpp_file.write(f"# define {class_name.upper()}_HPP\n\n")
+        hpp_file.write(f"class {class_name} ")
+        hpp_file.write("{\n")
+        hpp_file.write("public:\n")
+        hpp_file.write(f"    {class_name}();\n")
+        hpp_file.write(f"    {class_name}({class_name} const& copy);\n")
+        hpp_file.write(f"    ~{class_name}();\n")
+        hpp_file.write(f"    {class_name} &operator=({class_name} const& copy);\n")
+        hpp_file.write("\nprivate:\n\n")
+        hpp_file.write("};\n\n")
+        hpp_file.write(f"#endif {class_name.upper()}_HPP\n")
+
+    with open(f"{file_path}.cpp", 'w') as cpp_file:
+        cpp_file.write(f'#include "{class_name}.hpp"\n\n')
+        cpp_file.write(f"{class_name}::{class_name}() ") # constructor
+        cpp_file.write("{\n\n}\n\n")
+        cpp_file.write(f"{class_name}::{class_name}({class_name} const& copy) ") # copy constructor
+        cpp_file.write("{\n\n}\n\n")
+        cpp_file.write(f"{class_name}::~{class_name}() ") # destructor
+        cpp_file.write("{\n\n}\n\n")
+        cpp_file.write(f"{class_name} &{class_name}::operator=({class_name} const& copy) ") # assignment operator
+        cpp_file.write("{\n")
+        cpp_file.write("    if (this != &other) ")
+        cpp_file.write("    {\n\n    }\n")
+        cpp_file.write("    return (*this);\n")
+        cpp_file.write("}\n\n")
+
+def create_debug_file(output_path="./"):
+    if output_path != "./":
+        file_path = os.path.join(output_path, "debug.hpp")
+    else:
+        file_path = "debug.hpp"
+
+    with open(file_path, 'w') as debug_file:
+        debug_file.write("#ifndef DEBUG_HPP\n")
+        debug_file.write("# define DEBUG_HPP\n\n")
+        debug_file.write("/* COLORS */\n")
+        debug_file.write("# define WHITE \"\\e[0m\"\n")
+        debug_file.write("# define RED \"\\e[31m\"\n")
+        debug_file.write("# define GRAY \"\\e[90m\"\n\n")
+        debug_file.write("/* Printing Debug Message */\n")
+        debug_file.write("# ifdef DEBUG\n")
+        debug_file.write("# define DEBUG_MESSAGE(message, color) do {std::cout << (color) << message << WHITE << std::endl; } while(0)\n")
+        debug_file.write("# else\n")
+        debug_file.write("# define DEBUG_MESSAGE(message, color) do {} while(0)\n")
+        debug_file.write("# endif\n\n")
+        debug_file.write("#endif // DEBUG_HPP\n")
+
+def create_main_file(output_path="./"):
+    if output_path != "./":
+        file_path = os.path.join(output_path, "main.cpp")
+    else:
+        file_path = "main.cpp"
+
+    with open(file_path, 'w') as main_file:
+        main_file.write("#include <iostream>\n\n")
+        main_file.write("int main() {\n")
+        main_file.write("    // Your code here\n")
+        main_file.write("    return 0;\n")
+        main_file.write("}\n")
+
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python3 create_cpp_files.py <file1> <file2> ... [output_path]")
-        return
-
-    output_path = "./"
-    if len(sys.argv) > 2 and not sys.argv[-1].endswith(".cpp") and not sys.argv[-1].endswith(".hpp"):
-        output_path = sys.argv[-1]
-        for file_name in sys.argv[1:-1]:
-            create_cpp_file(file_name, output_path)
+    if len(sys.argv) != 2:
+        print("Usage: python3 create_files.py [output_path]")
+        sys.exit(1)
+    elif len(sys.argv) == 2:
+        output_path = sys.argv[1]
     else:
-        for file_name in sys.argv[1:]:
-            create_cpp_file(file_name, output_path)
+        output_path = "./"
+    os.system("clear")
+    while (True):
+        print("What do you want to create?")
+        print("1. Makefile")
+        print("2. C++ class")
+        print("3. Debug file")
+        print("4. Main file")
+        print("5. Exit")
+        choice = input("Choice: ")
 
-    makefile = input("Do you want to create a Makefile? (y/n) ")
-    if makefile == "y":
-        generate_makefile(output_path)
-    elif makefile == "n":
-        print("Alright")
-    else:
-        print("Invalid Input")
+        if choice == "1":
+            generate_makefile(output_path)
+        elif choice == "2":
+            create_cpp_class(output_path)
+        elif choice == "3":
+            create_debug_file(output_path)
+        elif choice == "4":
+            create_main_file(output_path)
+        elif choice == "5":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid Input")
 
 if __name__ == "__main__":
     main()
