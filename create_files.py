@@ -19,7 +19,10 @@ def generate_makefile(output_path="./"):
     else:
         file_path = "Makefile"
 
-    execname = input("Enter the name of the executable: ")
+    execname = input("Enter the name of the executable (type n to cancel): ")
+    if execname == "n":
+        print("Cancelling request...")
+        return
 
     with open(file_path, 'w') as makefile:
         makefile.write("### COLORS\n")
@@ -69,7 +72,10 @@ def generate_makefile(output_path="./"):
         makefile.write(".PHONY : all clean fclean re\n")
 
 def create_cpp_class(output_path="./"):
-    class_name = input("Enter the name of the class: ")
+    class_name = input("Enter the name of the class (type n to cancel): ")
+    if class_name == "n":
+        print("Cancelling request...")
+        return
     if output_path != "./":
         file_path = os.path.join(output_path, class_name)
 
@@ -95,10 +101,9 @@ def create_cpp_class(output_path="./"):
         cpp_file.write("{\n\n}\n\n")
         cpp_file.write(f"{class_name}::~{class_name}() ") # destructor
         cpp_file.write("{\n\n}\n\n")
-        cpp_file.write(f"{class_name} &{class_name}::operator=({class_name} const& copy) ") # assignment operator
+        cpp_file.write(f"{class_name}& {class_name}::operator=({class_name} const& copy) ") # assignment operator
         cpp_file.write("{\n")
-        cpp_file.write("    if (this != &other) ")
-        cpp_file.write("    {\n\n    }\n")
+        cpp_file.write("    if (this == &copy) return (*this);\n")
         cpp_file.write("    return (*this);\n")
         cpp_file.write("}\n\n")
 
@@ -107,6 +112,10 @@ def create_debug_file(output_path="./"):
         file_path = os.path.join(output_path, "debug.hpp")
     else:
         file_path = "debug.hpp"
+    opt = input("Do you wish to create a debug.hpp file (y/n): ")
+    if opt == "n":
+        print("Cancelling request...")
+        return
 
     with open(file_path, 'w') as debug_file:
         debug_file.write("#ifndef DEBUG_HPP\n")
@@ -129,6 +138,11 @@ def create_main_file(output_path="./"):
     else:
         file_path = "main.cpp"
 
+    opt = input("Do you wish to create a main.cpp file (y/n): ")
+    if opt == "n":
+        print("Cancelling request...")
+        return
+
     with open(file_path, 'w') as main_file:
         main_file.write("#include <iostream>\n\n")
         main_file.write("int main() {\n")
@@ -144,25 +158,25 @@ def main():
         output_path = sys.argv[1]
     else:
         output_path = "./"
-    os.system("clear" if (system() == "Darwin" or system() == "Linux") else "cls")
-    while (True):
-        print("What do you want to create?")
-        print("1. Makefile")
-        print("2. C++ class")
-        print("3. Debug file")
-        print("4. Main file")
-        print("5. Exit")
-        choice = input("Choice: ")
+    os.system("clear" if system() == "Darwin" or system() == "Linux" else "cls")
+    print("What do you want to create?")
+    print("1. Makefile")
+    print("2. C++ class")
+    print("3. Debug file")
+    print("4. Main file")
+    print("5. Exit")
 
-        if choice == "1":
+    while (True):
+        option = input("Enter the number here: ")
+        if option == "1":
             generate_makefile(output_path)
-        elif choice == "2":
+        elif option == "2":
             create_cpp_class(output_path)
-        elif choice == "3":
+        elif option == "3":
             create_debug_file(output_path)
-        elif choice == "4":
+        elif option == "4":
             create_main_file(output_path)
-        elif choice == "5":
+        elif option == "5" or option == "exit" or option == "Exit":
             print("Exiting...")
             break
         else:
