@@ -11,6 +11,7 @@ Ask if the user wants to create more files (repeat loop basically)
 
 import os
 import sys
+from platform import system
 
 def generate_makefile(output_path="./"):
     if output_path != "./":
@@ -136,14 +137,14 @@ def create_main_file(output_path="./"):
         main_file.write("}\n")
 
 def main():
-    if len(sys.argv) != 2:
+    if len(sys.argv) > 2:
         print("Usage: python3 create_files.py [output_path]")
         sys.exit(1)
     elif len(sys.argv) == 2:
         output_path = sys.argv[1]
     else:
         output_path = "./"
-    os.system("clear")
+    os.system("clear" if (system() == "Darwin" or system() == "Linux") else "cls")
     while (True):
         print("What do you want to create?")
         print("1. Makefile")
