@@ -30,6 +30,37 @@ std::string error_input[10] = {
     "inf",
     "nan"
 };
+
+/**
+ * test cases:
+ * 1. empty string
+ * 2. "0.0"
+ * 3. "42.0f"
+*/
+static void printChar(std::string& input) {
+    if (input.empty()) {
+        std::cout << "char: impossible" << std::endl;
+        return;
+    }
+    for (size_t i = 0; i < input.length(); i++) {
+        input[i] = tolower(input[i]);
+    }
+    for (int i = 0; i < 10; i++) {
+        if (input == error_input[i]) {
+            std::cout << "char: impossible" << std::endl;
+            return;
+        }
+    }
+    if (std::atoi(input.c_str()) && (std::atoi(input.c_str()) < 32 || std::atoi(input.c_str()) > 126)) {
+        std::cout << "char: Non displayable" << std::endl;
+        return;
+    }
+
+    char character = static_cast<char>(input[0]);
+
+    std::cout << "char: '" << character << "'" << std::endl;
+}
+
 // input should be a c++ literal
 // could be a char, int (base-10), float (base-10) or double (base-10)
 // if the conversion is not possible, display "impossible"
