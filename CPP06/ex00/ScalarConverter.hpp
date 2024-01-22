@@ -1,7 +1,7 @@
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
 
-/* COLORS */
+/* Colors */
 # define WHITE "\e[0m"
 # define RED "\e[31m"
 # define GRAY "\e[90m"
@@ -19,7 +19,7 @@ class ScalarConverter {
 public:
     ~ScalarConverter();
 
-    static void convert(std::string cppLiteral);
+    static void convert(std::string input);
 
 private:
     ScalarConverter();
