@@ -23,11 +23,13 @@
 # define MAX_DOUBLE std::numeric_limits<double>::max()
 # define MIN_DOUBLE std::numeric_limits<double>::min()
 
+using std::string;
+
 class ScalarConverter {
 public:
     ~ScalarConverter();
 
-    static void convert(std::string input);
+    static void convert(string input);
 
 private:
     ScalarConverter();

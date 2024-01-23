@@ -20,7 +20,7 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& copy) {
     return *this;
 }
 
-std::string error_input[10] = {
+string error_input[10] = {
     "-inff",
     "+inff",
     "inff",
@@ -37,7 +37,7 @@ std::string error_input[10] = {
  * 2. "0.0"
  * 3. "42.0f"
 */
-static void printChar(std::string& input) {
+static void printChar(string& input) {
     if (input.empty()) {
         std::cout << "char: impossible" << std::endl;
         return;
@@ -64,8 +64,7 @@ static void printChar(std::string& input) {
 // input should be a c++ literal
 // could be a char, int (base-10), float (base-10) or double (base-10)
 // if the conversion is not possible, display "impossible"
-// if the conversion is not displayable, display "Non displayable"
-void ScalarConverter::convert(std::string input) {
+void ScalarConverter::convert(string input) {
 
     printChar(input);
     // printInt(input);
