@@ -44,11 +44,27 @@ static bool printChar(string& input) {
     return true;
 }
 
+static bool isInvalid(string& input) {
+    string possibleErrors[16] = {"inff", "-inff", "+inff", "nanf", "inf", "-inf", "+inf", "nan", "INFF", "-INFF", "+INFF", "NANF", "INF", "-INF", "+INF", "NAN"};
+
+    for (int i = 0; i < 16; i++) {
+        if (input == possibleErrors[i]) {
+            std::cout << "char: impossible\n";
+            std::cout << "int: impossible\n";
+            std::cout << "float: " << strtof(input.c_str(), NULL) << "f\n";
+            std::cout << "double: " << strtod(input.c_str(), NULL) << "\n";
+            return true;
+        }
+    }
+    return false;
+}
+
 // input should be a c++ literal
 // could be a char, int (base-10), float (base-10) or double (base-10)
 // if the conversion is not possible, display "impossible"
 void ScalarConverter::convert(string input) {
-
+    if (isInvalid(input))
+        return;
     printChar(input);
     // printInt(input);
     // printFloat(input);
