@@ -13,8 +13,10 @@
 # define DEBUG_MESSAGE(message, color) do {} while(0)
 # endif
 
+# include <iostream>
 # include <string>
 # include <limits>
+# include <cstdlib>
 
 # define MAX_INT std::numeric_limits<int>::max()
 # define MIN_INT std::numeric_limits<int>::min()
