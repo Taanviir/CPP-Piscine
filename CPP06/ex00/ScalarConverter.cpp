@@ -1,5 +1,7 @@
 #include "ScalarConverter.hpp"
 
+inputType ScalarConverter::_type = ERROR;
+
 ScalarConverter::ScalarConverter() {
     DEBUG_MESSAGE("ScalarConverter default constructor called", GRAY);
 }
@@ -19,54 +21,129 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& copy) {
     return *this;
 }
 
-/**
- * test cases:
- * 1. empty string
- * 2. "0.0"
- * 3. "42.0f"
-*/
-static bool printChar(string& input) {
-    if (input.empty()) {
-        std::cout << "char: impossible" << std::endl;
-        return false;
-    }
-    for (size_t i = 0; i < input.length(); i++) {
-        input[i] = tolower(input[i]);
-    }
-    if (std::atoi(input.c_str()) && (std::atoi(input.c_str()) < 32 || std::atoi(input.c_str()) > 126)) {
-        std::cout << "char: Non displayable" << std::endl;
-        return false;
-    }
-
-    char character = static_cast<char>(input[0]);
-
-    std::cout << "char: '" << character << "'" << std::endl;
-    return true;
-}
-
 static bool isInvalid(string& input) {
-    string possibleErrors[16] = {"inff", "-inff", "+inff", "nanf", "inf", "-inf", "+inf", "nan", "INFF", "-INFF", "+INFF", "NANF", "INF", "-INF", "+INF", "NAN"};
+    string lowercaseInput = input;
+    for (size_t i = 0; i < input.length(); i++) {
+        lowercaseInput[i] = tolower(input[i]);
+    }
 
-    for (int i = 0; i < 16; i++) {
-        if (input == possibleErrors[i]) {
+    string possibleErrors[8] = {"inff", "-inff", "+inff", "nanf", "inf", "-inf", "+inf", "nan"};
+
+    for (int i = 0; i < 8; i++) {
+        if (lowercaseInput == possibleErrors[i]) {
             std::cout << "char: impossible\n";
             std::cout << "int: impossible\n";
-            std::cout << "float: " << strtof(input.c_str(), NULL) << "f\n";
-            std::cout << "double: " << strtod(input.c_str(), NULL) << "\n";
+            std::cout << "float: " << strtof(lowercaseInput.c_str(), NULL) << "f\n";
+            std::cout << "double: " << strtod(lowercaseInput.c_str(), NULL) << std::endl;
             return true;
         }
     }
     return false;
 }
 
-// input should be a c++ literal
-// could be a char, int (base-10), float (base-10) or double (base-10)
-// if the conversion is not possible, display "impossible"
+static inputType checkInput(string& input) {
+    if (input.length() == 1 && isascii(input[0]) && !isdigit(input[0]))
+        return CHAR;
+    else if (input.find_first_of("+-") != input.find_last_of("+-")) // checking for multiple +-
+        return ERROR;
+    else if (input.find_first_not_of("+-0123456789") == string::npos) {
+        if (input.find(".") == string::npos && input.length() > 10)
+            return DOUBLE;
+        return INT;
+    }
+    else if (input.find_first_not_of("+-0123456789.f") == string::npos) {
+        // handle multiple . and f in input
+        if (input.find_first_of(".") != input.find_last_of(".")) {
+            std::cout << "Error: multiple '.' in input." << std::endl;
+            return ERROR;
+        }
+        else if (input.find_first_of("f") != input.find_last_of("f")) {
+            std::cout << "Error: multiple 'f' in input." << std::endl;
+            return ERROR;
+        }
+        else if (!isdigit(input[input.find(".") + 1])) {
+            std::cout << "Error: invalid decimal input." << std::endl;
+            return ERROR;
+        }
+        // float will have f, double will not
+        if (input.find("f") != string::npos) {
+            if (input[input.find("f") + 1] != '\0') {
+                std::cout << "Error: invalid float input." << std::endl;
+                return ERROR;
+            }
+            return FLOAT;
+        }
+        else {
+            return DOUBLE;
+        }
+    }
+    std::cout << "Error: invalid input." << std::endl;
+    return ERROR;
+}
+
+static void printChar(string& input, inputType type) {
+    if (input.length() == 1 && isascii(input[0]) && !isdigit(input[0])) {
+        std::cout << "char: '" << input[0] << "'" << std::endl;
+    }
+    else if (type == INT || type == FLOAT || type == DOUBLE) {
+        long int number = strtod(input.c_str(), NULL);
+        if (number >= 0 && number <= MAX_UCHAR) {
+            if (isprint(number))
+                std::cout << "char: '" << static_cast<char>(number) << "'" << std::endl;
+            else
+                std::cout << "char: Non displayable" << std::endl;
+        }
+        else
+            std::cout << "char: impossible" << std::endl;
+    }
+}
+
+static void printInt(string& input, inputType type) {
+    double number;
+    if (type == CHAR)
+        number = input[0];
+    else if (type == INT)
+        number = strtol(input.c_str(), NULL, 10);
+    else if (type == FLOAT)
+        number = strtof(input.c_str(), NULL);
+    else if (type == DOUBLE)
+        number = std::strtod(input.c_str(), NULL);
+
+    if (number > MAX_INT || number < MIN_INT)
+        std::cout << "int: impossible" << std::endl;
+    else
+        std::cout << "int: " << static_cast<int>(number) << std::endl;
+}
+
+static void printDecimal(string& input, inputType type) {
+    double number;
+    if (type == CHAR)
+        number = input[0];
+    else if (type == INT || type == FLOAT || type == DOUBLE)
+        number = strtod(input.c_str(), NULL);
+
+    if (number > MAX_FLOAT || number < MIN_FLOAT)
+        std::cout << "float: impossible" << std::endl;
+    else
+        std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(number) << "f" << std::endl;
+
+    if (number == HUGE_VAL || number == -HUGE_VAL || number != number)
+        std::cout << "double: impossible" << std::endl;
+    else
+        std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(number) << std::endl;
+}
+
 void ScalarConverter::convert(string input) {
     if (isInvalid(input))
         return;
-    printChar(input);
-    // printInt(input);
-    // printFloat(input);
-    // printDouble(input);
+
+    // check input type
+    ScalarConverter::_type = checkInput(input);
+    if (ScalarConverter::_type == ERROR)
+        return;
+
+    // print conversions
+    printChar(input, ScalarConverter::_type);
+    printInt(input, ScalarConverter::_type);
+    printDecimal(input, ScalarConverter::_type);
 }
