@@ -91,7 +91,7 @@ def create_cpp_class(output_path="./"):
         hpp_file.write(f"    {class_name} &operator=({class_name} const& copy);\n")
         hpp_file.write("\nprivate:\n\n")
         hpp_file.write("};\n\n")
-        hpp_file.write(f"#endif {class_name.upper()}_HPP\n")
+        hpp_file.write(f"#endif //{class_name.upper()}_HPP\n")
 
     with open(f"{file_path}.cpp", 'w') as cpp_file:
         cpp_file.write(f'#include "{class_name}.hpp"\n\n')
