@@ -24,7 +24,6 @@ private:
     Serializer(Serializer const& copy);
     ~Serializer();
     Serializer &operator=(Serializer const& copy);
-
 };
 
 #endif // SERIALIZER_HPP
