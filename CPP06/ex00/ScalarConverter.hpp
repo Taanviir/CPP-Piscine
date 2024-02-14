@@ -39,7 +39,6 @@ enum inputType {
 
 class ScalarConverter {
 public:
-    ~ScalarConverter();
 
     static void convert(string input);
 
@@ -47,6 +46,7 @@ private:
     static inputType _type;
     ScalarConverter();
     ScalarConverter(const ScalarConverter& copy);
+    ~ScalarConverter();
     ScalarConverter& operator=(const ScalarConverter& copy);
 };
 
