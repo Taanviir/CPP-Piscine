@@ -103,8 +103,7 @@ def create_cpp_class(output_path="./"):
         cpp_file.write("{\n\n}\n\n")
         cpp_file.write(f"{class_name}& {class_name}::operator=({class_name} const& copy) ") # assignment operator
         cpp_file.write("{\n")
-        cpp_file.write("    if (this == &copy) return (*this);\n")
-        cpp_file.write("    return (*this);\n")
+        cpp_file.write("    return *this;\n")
         cpp_file.write("}\n\n")
 
 def create_debug_file(output_path="./"):
