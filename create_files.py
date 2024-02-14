@@ -167,7 +167,7 @@ def main():
     print("5. Exit")
 
     while (True):
-        option = input("Enter the number here: ")
+        option = input("Enter the option number here: ")
         if option == "1":
             generate_makefile(output_path)
         elif option == "2":
