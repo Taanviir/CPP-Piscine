@@ -78,6 +78,8 @@ def create_cpp_class(output_path="./"):
         return
     if output_path != "./":
         file_path = os.path.join(output_path, class_name)
+    else:
+        file_path = class_name
 
     with open(f"{file_path}.hpp", 'w') as hpp_file:
         hpp_file.write(f"#ifndef {class_name.upper()}_HPP\n")
@@ -163,7 +165,8 @@ def main():
     print("2. C++ class")
     print("3. Debug file")
     print("4. Main file")
-    print("5. Exit")
+    print("5. All of the above")
+    print("6. Exit")
 
     while (True):
         option = input("Enter the option number here: ")
@@ -175,7 +178,12 @@ def main():
             create_debug_file(output_path)
         elif option == "4":
             create_main_file(output_path)
-        elif option == "5" or option == "exit" or option == "Exit":
+        elif option == "5":
+            generate_makefile(output_path)
+            create_cpp_class(output_path)
+            create_debug_file(output_path)
+            create_main_file(output_path)
+        elif option == "6" or option == "exit" or option == "Exit":
             print("Exiting...")
             break
         else:
