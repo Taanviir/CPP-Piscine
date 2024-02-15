@@ -46,3 +46,6 @@ intern
 convert
 serializer
 based
+
+# CPP07
+templates
