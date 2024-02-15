@@ -4,7 +4,7 @@
 template <class T>
 class Array {
 public:
-    Array(): _size(0) { _array = new T; }
+    Array(): _size(0) { _array = new T[_size]; }
     ~Array() {
         if (_array)
             delete [] _array;
