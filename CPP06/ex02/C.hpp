@@ -7,8 +7,6 @@ class C: public Base {
 public:
     C();
     ~C();
-
-private:
 };
 
 #endif // C_HPP
