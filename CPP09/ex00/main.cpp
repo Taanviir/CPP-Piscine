@@ -1,6 +1,35 @@
 #include "BitcoinExchange.hpp"
 #include <sys/stat.h>
 
+static bool validateDate(const std::string& date) {
+    // Checking the date format
+    if (date.length() != 10)
+        return false;
+    if (date[4] != '-' || date[7] != '-')
+        return false;
+    for (size_t i = 0; i < date.length(); i++) {
+        if (i == 4 || i == 7)
+            continue; // Skipping '-'
+        if (!isdigit(date[i]))
+            return false;
+    }
+
+    // Checking the date values
+    std::istringstream istream(date);
+    int year, month, day;
+    char dash;
+    if (!(istream >> year >> dash >> month >> dash >> day))
+        return false;
+    if (month > 12 || month < 1)
+        return false;
+    if (day > 31 || day < 1)
+        return false;
+    if (year < 2000)
+        return false;
+
+    return true;
+}
+
 int main(int argc, char **argv) {
     if (argc != 2) {
         std::cout << "Usage: ./btc [input file]" << std::endl;
@@ -26,11 +55,43 @@ int main(int argc, char **argv) {
         return 1;
     }
 
+    BitcoinExchange exchange;
+
     // Reading the input file
     std::string line;
-    
+    while (getline(inputFile, line)) {
+        if (line.empty() || line.compare("date | value") == 0)
+            continue;
 
-    BitcoinExchange btc;
+        size_t pos = line.find('|');
+        // check for delimiter
+        if (pos == std::string::npos) {
+            std::cout << ERROR_MISSING_DEL << " => " << line << std::endl;
+            continue;
+        }
+        // check for date and validate it
+        std::string date = line.substr(0, pos - 1);
+        if (!validateDate(date)) {
+            std::cout << ERROR_BAD_DATE << " => " << date << std::endl;
+            continue;
+        }
+        // check for value and validate it
+        double value = strtod(line.substr(pos + 2).c_str(), NULL);
+        if (value < 0) {
+            std::cout << ERROR_NEGATIVE << std::endl;
+            continue;
+        } else if (value > 1000) {
+            std::cout << ERROR_LARGE << std::endl;
+            continue;
+        } else if (value == 0) {
+            std::cout << ERROR_MISSING_VALUE << std::endl;
+            continue;
+        }
 
+        double newAmount = exchange.convertAmount(date, value);
+        std::cout << date << " => " << value << " = " << std::fixed << std::setprecision(2) << newAmount << std::endl;
+    }
+
+    inputFile.close();
     return 0;
 }
