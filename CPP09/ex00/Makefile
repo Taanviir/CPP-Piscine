@@ -13,6 +13,8 @@ OBJ_DIR = obj/
 OBJS_LIST = $(SRCS:.cpp=.o)
 OBJS = $(addprefix $(OBJ_DIR), $(OBJS_LIST))
 
+INPUT_TXT = input.txt
+
 all : $(NAME)
 
 $(NAME) : $(OBJS)
@@ -26,11 +28,11 @@ $(OBJ_DIR)%.o : %.cpp
 
 valgrind : CPPFLAGS+=-g3 -DDEBUG
 valgrind : re
-	@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(INPUT_TXT)
 
 debug : CPPFLAGS+=-g3 -fsanitize=address -DDEBUG
 debug : re
-	@./$(NAME)
+	@./$(NAME) $(INPUT_TXT)
 
 clean :
 	@rm -rf $(OBJ_DIR)
