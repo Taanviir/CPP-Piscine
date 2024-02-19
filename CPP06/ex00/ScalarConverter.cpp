@@ -99,7 +99,7 @@ static void printChar(string& input, inputType type) {
 }
 
 static void printInt(string& input, inputType type) {
-    double number;
+    double number = 0;
     if (type == CHAR)
         number = input[0];
     else if (type == INT)
@@ -116,7 +116,7 @@ static void printInt(string& input, inputType type) {
 }
 
 static void printDecimal(string& input, inputType type) {
-    double number;
+    double number = 0;
     if (type == CHAR)
         number = input[0];
     else if (type == INT || type == FLOAT || type == DOUBLE)
