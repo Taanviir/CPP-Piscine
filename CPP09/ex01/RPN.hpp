@@ -7,11 +7,11 @@
 class RPN {
 public:
     RPN();
-    RPN(RPN const& copy);
     ~RPN();
-    RPN &operator=(RPN const& copy);
 
 private:
+    RPN(RPN const& copy);
+    RPN& operator=(RPN const& copy);
 };
 
 #endif // RPN_HPP
