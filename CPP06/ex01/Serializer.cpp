@@ -23,8 +23,8 @@ Serializer& Serializer::operator=(Serializer const& copy) {
  * @brief Deserialize a Data object from a raw pointer
  * Basically just cast the raw pointer to a Data pointer
  * 
- * @param raw The raw pointer to deserialize
- * @return Data* The deserialized Data object
+ * @param ptr The pointer to serialize
+ * @return uintptr_t The serialized pointer
 */
 uintptr_t Serializer::serialize(Data* ptr) {
     return reinterpret_cast<uintptr_t>(ptr);

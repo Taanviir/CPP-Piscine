@@ -44,13 +44,12 @@ static bool isInvalid(string& input) {
 static inputType checkInput(string& input) {
     if (input.length() == 1 && isascii(input[0]) && !isdigit(input[0]))
         return CHAR;
-    else if (input.find_first_of("+-") != input.find_last_of("+-")) // checking for multiple +-
+    else if (input.find_first_of("+-") != input.find_last_of("+-")) {// checking for multiple +-
+        std::cout << "Error: multiple '+' or '-' in input." << std::endl;
         return ERROR;
-    else if (input.find_first_not_of("+-0123456789") == string::npos) {
-        if (input.find(".") == string::npos && input.length() > 10)
-            return DOUBLE;
-        return INT;
     }
+    else if (input.find_first_not_of("+-0123456789") == string::npos)
+        return INT;
     else if (input.find_first_not_of("+-0123456789.f") == string::npos) {
         // handle multiple . and f in input
         if (input.find_first_of(".") != input.find_last_of(".")) {
