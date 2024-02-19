@@ -20,12 +20,26 @@ static bool validateDate(const std::string& date) {
     char dash;
     if (!(istream >> year >> dash >> month >> dash >> day))
         return false;
-    if (month > 12 || month < 1)
+    if (month < 1 || month > 12)
         return false;
-    if (day > 31 || day < 1)
+    if (day < 1 || day > 31)
         return false;
     if (year < 2000)
         return false;
+
+    // Checking for months with 30 days
+    if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
+        return false;
+
+    // Checking for February
+    if (month == 2) {
+        // Check for leap year
+        bool leapYear = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+        if (leapYear && day > 29)
+            return false; // February has 29 days in a leap year
+        else if (!leapYear && day > 28)
+            return false; // February has 28 days in a non-leap year
+    }
 
     return true;
 }
