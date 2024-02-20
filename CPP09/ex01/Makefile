@@ -32,6 +32,9 @@ debug : CPPFLAGS+=-g3 -fsanitize=address -DDEBUG
 debug : re
 	@./$(NAME)
 
+test : CPPFLAGS+=-DTEST -g3 -DDEBUG
+test : re
+
 clean :
 	@rm -rf $(OBJ_DIR)
 	@echo $(RED_B)"Object files removed."$(RESET)
