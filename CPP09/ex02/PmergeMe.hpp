@@ -3,12 +3,13 @@
 
 class PmergeMe {
 public:
-    PmergeMe();
-    PmergeMe(PmergeMe const& copy);
+    PmergeMe(int* arr, int size);
     ~PmergeMe();
-    PmergeMe& operator=(PmergeMe const& copy);
 
 private:
+    PmergeMe();
+    PmergeMe(PmergeMe const& copy);
+    PmergeMe& operator=(PmergeMe const& copy);
 };
 
 #endif // PMERGEME_HPP
