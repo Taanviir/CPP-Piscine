@@ -4,11 +4,14 @@
 # include <vector>
 # include <list>
 # include <iostream>
+# include <ctime>
 
 class PmergeMe {
 public:
     PmergeMe(int* arr, int size);
     ~PmergeMe();
+
+    void sort(void);
 
 private:
     std::vector<int> _array;

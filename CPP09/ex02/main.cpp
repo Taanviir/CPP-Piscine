@@ -33,6 +33,8 @@ int main(int argc, char **argv) {
 
     PmergeMe pmergeMe(array, size);
 
+    pmergeMe.sort();
+
     delete [] array;
     return 0;
 }
