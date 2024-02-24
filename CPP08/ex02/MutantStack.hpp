@@ -3,6 +3,8 @@
 
 #include <stack>
 
+// TODO don't inherit from std::stack as std::stack destructor is not virtual
+
 template < typename T >
 class MutantStack: public std::stack<T> {
 public:
@@ -20,8 +22,6 @@ public:
 
     iterator begin() { return this->c.begin(); }
     iterator end() { return this->c.end(); }
-
-private:
 
 };
 
