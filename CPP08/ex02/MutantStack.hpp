@@ -3,20 +3,16 @@
 
 #include <stack>
 
-// TODO don't inherit from std::stack as std::stack destructor is not virtual
-
-template < typename T >
-class MutantStack: public std::stack<T> {
+template <typename Type>
+class MutantStack: public std::stack<Type> {
 public:
-    typedef typename std::stack<T>::container_type::iterator iterator;
+    typedef typename std::stack<Type>::container_type::iterator iterator;
 
     MutantStack() {}
-    MutantStack(MutantStack const & src) { *this = src; }
+    MutantStack(MutantStack const& src) { *this = src; }
     ~MutantStack() {}
-    MutantStack & operator=(MutantStack const & src) {
-        if (this != &src) {
-            std::stack<T>::operator=(src);
-        }
+    MutantStack& operator=(MutantStack const& src) {
+        std::stack<Type>::operator=(src);
         return *this;
     }
 
