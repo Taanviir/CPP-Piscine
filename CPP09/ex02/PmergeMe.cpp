@@ -26,11 +26,33 @@ PmergeMe::PmergeMe(int* arr, int size) {
 }
 
 void PmergeMe::sort(void) {
-    clock_t start = clock();
+    if (_size == 0) return;
 
-    if (_array.size() == 0) return;
-    else if (_array.size() > 1) {
+    {
+        clock_t start = clock();
+        _sortArray();
+        clock_t end = clock();
+
+        double duration = (static_cast<double>(end - start) / CLOCKS_PER_SEC) * 1000;
+        std::cout << "Time to process a range of " << _array.size()
+        << " elements with std::vector: " << duration << " ms" << std::endl;
     }
-    clock_t end = clock();
-    std::cout << "Time to process a range of " << _array.size() << " elements with std::vector: " << (static_cast<double>(end - start) / CLOCKS_PER_SEC) * 1000 << " ms" << std::endl;
+
+    {
+        clock_t start = clock();
+        _sortArray();
+        clock_t end = clock();
+
+        double duration = (static_cast<double>(end - start) / CLOCKS_PER_SEC) * 1000;
+        std::cout << "Time to process a range of " << _list.size()
+        << " elements with std::list: " << duration << " ms" << std::endl;
+    }
+}
+
+void PmergeMe::_sortArray(void) {
+    // sort the vector
+}
+
+void PmergeMe::_sortList(void) {
+    // sort the list
 }
