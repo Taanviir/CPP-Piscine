@@ -3,6 +3,14 @@
 #include <limits>
 #include "PmergeMe.hpp"
 
+bool isSorted(int* array, int size) {
+    for (int i = 0; i < size - 1; i++) {
+        if (array[i] > array[i + 1])
+            return false;
+    }
+    return true;
+}
+
 int main(int argc, char **argv) {
     if (argc < 2) {
         std::cout << "Usage: ./PmergeMe [num1] [num2] ... [numN]" << std::endl;
@@ -31,6 +39,12 @@ int main(int argc, char **argv) {
         array[i - 1] = static_cast<int>(num);
     }
 
+    if (isSorted(array, size)) {
+        std::cout << "Error: Array is already sorted." << std::endl;
+        delete [] array;
+        return 1;
+    }
+
     PmergeMe pmergeMe(array, size);
 
     std::sort(array, array + size);
@@ -41,6 +55,7 @@ int main(int argc, char **argv) {
             return 1;
         }
     }
+
     pmergeMe.sort();
 
     delete [] array;
