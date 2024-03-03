@@ -22,6 +22,13 @@ private:
     void _sortArray(void);
     void _sortList(void);
 
+    template <typename container>
+    void print(container& con) {
+        for (typename container::const_iterator itr = con.begin(); itr != con.end(); itr++)
+            std::cout << *itr << " ";
+        std::cout << std::endl;
+    }
+
     PmergeMe();
     PmergeMe(PmergeMe const& copy);
     PmergeMe& operator=(PmergeMe const& copy);
