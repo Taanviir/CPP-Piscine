@@ -5,6 +5,7 @@
 # include <list>
 # include <iostream>
 # include <ctime>
+# include <algorithm>
 
 class PmergeMe {
 public:
