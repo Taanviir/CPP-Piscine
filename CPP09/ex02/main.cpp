@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
         numbers += " ";
     }
     if (numbers.find("-") != std::string::npos) {
-        std::cout << "Error: Invalid input" << std::endl;
+        std::cout << "Error: Negative numbers detected." << std::endl;
         return 1;
     }
 
@@ -24,8 +24,8 @@ int main(int argc, char **argv) {
     for (int i = 1; i < argc; i++) {
         double num = strtod(argv[i], NULL);
         if (num < std::numeric_limits<int>::min() || num > std::numeric_limits<int>::max()) {
-            std::cout << "Error: Invalid input" << std::endl;
-            delete[] array;
+            std::cout << "Error: Input is beyond integer range" << std::endl;
+            delete [] array;
             return 1;
         }
         array[i - 1] = static_cast<int>(num);
@@ -33,6 +33,14 @@ int main(int argc, char **argv) {
 
     PmergeMe pmergeMe(array, size);
 
+    std::sort(array, array + size);
+    for (int i = 0; i < size - 1; i++) {
+        if (array[i] == array[i + 1]) {
+            std::cout << "Error: Duplicate numbers detected." << std::endl;
+            delete [] array;
+            return 1;
+        }
+    }
     pmergeMe.sort();
 
     delete [] array;
