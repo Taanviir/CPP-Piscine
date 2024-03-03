@@ -26,12 +26,21 @@ PmergeMe::PmergeMe(int* arr, int size) {
 }
 
 void PmergeMe::sort(void) {
-    if (_size == 0) return;
+    if (_array.size() == 0 || _list.size() == 0) {
+        std::cout << "Error: Cannot sort empty containers" << std::endl;
+        return;
+    }
 
     {
+        std::cout << "Before:  ";
+        print(_array);
+
         clock_t start = clock();
         _sortArray();
         clock_t end = clock();
+
+        std::cout << "After:   ";
+        print(_array);
 
         double duration = (static_cast<double>(end - start) / CLOCKS_PER_SEC) * 1000;
         std::cout << "Time to process a range of " << _array.size()
