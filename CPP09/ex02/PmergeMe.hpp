@@ -28,6 +28,24 @@ private:
         std::cout << std::endl;
     }
 
+    template <typename container>
+    int _binarySearch(container& con, int target) {
+        int low = 0;
+        int high = con.size() - 1;
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+
+            typename container::iterator itr = con.begin();
+            std::advance(itr, mid);
+            if (*itr < target)
+                low = mid + 1;
+            else
+                high = mid;
+        }
+        return low;
+    }
+
     PmergeMe();
     PmergeMe(PmergeMe const& copy);
     PmergeMe& operator=(PmergeMe const& copy);

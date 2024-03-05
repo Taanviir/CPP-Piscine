@@ -58,24 +58,10 @@ void PmergeMe::sort(void) {
     }
 }
 
-int binarySearch(const std::vector<int>& array, int target) {
-    int low = 0;
-    int high = array.size();
-
-    while (low < high) {
-        int mid = low + (high - low) / 2;
-
-        if (array[mid] < target)
-            low = mid + 1;
-        else
-            high = mid;
-    }
-    return low;
-}
-
 void PmergeMe::_sortArray(void) {
     std::vector< std::pair<int, int> > pairs;
 
+    // form pairs with larger number first
     for (size_t i = 0; i < _array.size(); i += 2) {
         if (i + 1 < _array.size() && _array[i] < _array[i + 1])
             std::swap(_array[i], _array[i + 1]);
@@ -98,30 +84,13 @@ void PmergeMe::_sortArray(void) {
     // insert the second element of the pair in the correct position using binary search
     for (size_t i = 0; i < pairs.size(); i++) {
         if (pairs[i].second == -1) {
-            int index = binarySearch(_array, pairs[i].first);
+            int index = _binarySearch(_array, pairs[i].first);
             _array.insert(_array.begin() + index, pairs[i].first);
             break;
         }
-        int index = binarySearch(_array, pairs[i].second);
+        int index = _binarySearch(_array, pairs[i].second);
         _array.insert(_array.begin() + index, pairs[i].second);
     }
-}
-
-int binarySearch(const std::list<int>& list, int target) {
-    int low = 0;
-    int high = list.size();
-
-    while (low < high) {
-        int mid = low + (high - low) / 2;
-
-        std::list<int>::const_iterator itr = list.begin();
-        std::advance(itr, mid);
-        if (*itr < target)
-            low = mid + 1;
-        else
-            high = mid;
-    }
-    return low;
 }
 
 void PmergeMe::_sortList(void) {
@@ -153,13 +122,13 @@ void PmergeMe::_sortList(void) {
     // insert the second element of the pair in the correct position using binary search
     for (std::list< std::pair<int, int> >::const_iterator itr = pairs.begin(); itr != pairs.end(); itr++) {
         if (itr->second == -1) {
-            int index = binarySearch(_list, itr->first);
+            int index = _binarySearch(_list, itr->first);
             std::list<int>::iterator listItr = _list.begin();
             std::advance(listItr, index);
             _list.insert(listItr, itr->first);
             break;
         }
-        int index = binarySearch(_list, itr->second);
+        int index = _binarySearch(_list, itr->second);
         std::list<int>::iterator listItr = _list.begin();
         std::advance(listItr, index);
         _list.insert(listItr, itr->second);
