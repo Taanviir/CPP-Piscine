@@ -17,7 +17,6 @@ public:
 private:
     std::vector<int> _array;
     std::list<int> _list;
-    int _size;
 
     void _sortArray(void);
     void _sortList(void);
