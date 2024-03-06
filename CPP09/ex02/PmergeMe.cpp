@@ -57,78 +57,76 @@ void PmergeMe::sort(void) {
 }
 
 void PmergeMe::_sortArray(void) {
-    std::vector< std::pair<int, int> > pairs;
+    bool hasStray = _array.size() % 2 != 0;
+    std::vector<int>::iterator end = hasStray ? _array.end() - 1 : _array.end();
 
-    // form pairs with larger number first
-    for (size_t i = 0; i < _array.size(); i += 2) {
-        if (i + 1 < _array.size() && _array[i] < _array[i + 1])
-            std::swap(_array[i], _array[i + 1]);
-        std::pair<int, int> pairOfNums(_array[i], (i + 1 < _array.size() ? _array[i + 1] : -1));
-        pairs.push_back(pairOfNums);
-    }
-
-    // bubble sort the pairs
-    for (size_t i = 0; i < pairs.size() && pairs[i].second != -1; i++) {
-        for (size_t j = i + 1; j < pairs.size() && pairs[j].second != -1; j++) {
-            if (pairs[i].first > pairs[j].first)
-                std::swap(pairs[i], pairs[j]);
+    // form pairs with larger number first and bubble sort the pairs
+    for (std::vector<int>::iterator itr = _array.begin(); itr != end; itr += 2) {
+        if (*itr < *(itr + 1))
+            std::swap(*itr, *(itr + 1));
+        for (std::vector<int>::iterator next = itr; next != end; next += 2) {
+            if (*itr > *next) {
+                std::swap(*itr, *next);
+                std::swap(*(itr + 1), *(next + 1));
+            }
         }
     }
+
+    std::vector<int> main, pend;
+    for (std::vector<int>::iterator itr = _array.begin(); itr != end; itr += 2) {
+        main.push_back(*itr);
+        pend.push_back(*(itr + 1));
+    }
+    if (hasStray)
+        pend.push_back(_array.back());
 
     _array.clear();
-    for (size_t i = 0; i < pairs.size() && pairs[i].second != -1; i++)
-        _array.push_back(pairs[i].first);
 
     // insert the second element of the pair in the correct position using binary search
-    for (size_t i = 0; i < pairs.size(); i++) {
-        if (pairs[i].second == -1) {
-            int index = _binarySearch(_array, pairs[i].first);
-            _array.insert(_array.begin() + index, pairs[i].first);
-            break;
-        }
-        int index = _binarySearch(_array, pairs[i].second);
-        _array.insert(_array.begin() + index, pairs[i].second);
+    for (std::vector<int>::const_iterator itr = pend.begin(); itr != pend.end(); itr++) {
+        int index = _binarySearch(main, *itr);
+        main.insert(main.begin() + index, *itr);
     }
+
+    _array = main;
 }
 
 void PmergeMe::_sortList(void) {
-    std::list< std::pair<int, int> > pairs;
+    bool hasStray = _list.size() % 2 != 0;
+    std::list<int>::iterator end = hasStray ? --_list.end() : _list.end();
 
-    for (std::list<int>::iterator itr = _list.begin(); itr != _list.end(); itr++) {
+    for (std::list<int>::iterator itr = _list.begin(); itr != end; std::advance(itr, 2)) {
         std::list<int>::iterator next = itr;
         next++;
-        if (next != _list.end() && *itr < *next)
+        if (*itr < *next)
             std::swap(*itr, *next);
-        std::pair<int, int> pairOfNums(*itr, (next != _list.end() ? *next : -1));
-        pairs.push_back(pairOfNums);
-        if (next != _list.end())
-            itr++;
     }
 
     // bubble sort the pairs
-    for (std::list< std::pair<int, int> >::iterator itr = pairs.begin(); itr != pairs.end() && itr->second != -1; itr++) {
-        for (std::list< std::pair<int, int> >::iterator next = itr; next != pairs.end() && next->second != -1; next++) {
-            if (itr->first > next->first)
+    for (std::list<int>::iterator itr = _list.begin(); itr != end; itr++) {
+        for (std::list<int>::iterator next = itr; next != end; next++) {
+            if (*itr > *next)
                 std::swap(*itr, *next);
         }
     }
 
-    _list.clear();
-    for (std::list< std::pair<int, int> >::iterator itr = pairs.begin(); itr != pairs.end() && itr->second != -1; itr++)
-        _list.push_back(itr->first);
-
-    // insert the second element of the pair in the correct position using binary search
-    for (std::list< std::pair<int, int> >::const_iterator itr = pairs.begin(); itr != pairs.end(); itr++) {
-        if (itr->second == -1) {
-            int index = _binarySearch(_list, itr->first);
-            std::list<int>::iterator listItr = _list.begin();
-            std::advance(listItr, index);
-            _list.insert(listItr, itr->first);
-            break;
-        }
-        int index = _binarySearch(_list, itr->second);
-        std::list<int>::iterator listItr = _list.begin();
-        std::advance(listItr, index);
-        _list.insert(listItr, itr->second);
+    std::list<int> main, pend;
+    for (std::list<int>::iterator itr = _list.begin(); itr != end;) {
+        main.push_back(*itr);
+        pend.push_back(*std::next(itr));
+        std::advance(itr, 2);
     }
+    if (hasStray)
+        pend.push_back(_list.back());
+
+    _list.clear();
+
+    for (std::list<int>::const_iterator itr = pend.begin(); itr != pend.end(); ++itr) {
+        int index = _binarySearch(main, *itr);
+        std::list<int>::iterator mainItr = main.begin();
+        std::advance(mainItr, index);
+        main.insert(mainItr, *itr);
+    }
+
+    _list = main;
 }
