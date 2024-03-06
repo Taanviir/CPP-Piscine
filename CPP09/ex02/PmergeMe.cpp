@@ -111,10 +111,9 @@ void PmergeMe::_sortList(void) {
     }
 
     std::list<int> main, pend;
-    for (std::list<int>::iterator itr = _list.begin(); itr != end;) {
+    for (std::list<int>::iterator itr = _list.begin(); itr != end; itr++) {
         main.push_back(*itr);
-        pend.push_back(*std::next(itr));
-        std::advance(itr, 2);
+        pend.push_back(*(++itr));
     }
     if (hasStray)
         pend.push_back(_list.back());
