@@ -33,15 +33,17 @@ private:
         int low = 0;
         int high = con.size() - 1;
 
-        while (low < high) {
+        while (low <= high) {
             int mid = low + (high - low) / 2;
 
             typename container::iterator itr = con.begin();
             std::advance(itr, mid);
-            if (*itr < target)
+            if (*itr == target)
+                return mid;
+            else if (*itr < target)
                 low = mid + 1;
             else
-                high = mid;
+                high = mid - 1;
         }
         return low;
     }
