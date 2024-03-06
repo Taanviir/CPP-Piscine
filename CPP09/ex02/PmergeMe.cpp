@@ -26,10 +26,8 @@ PmergeMe::PmergeMe(int* arr, int size) {
 }
 
 void PmergeMe::sort(void) {
-    if (_array.size() == 0 || _list.size() == 0) {
-        std::cout << "Error: Cannot sort empty containers" << std::endl;
-        return;
-    }
+    if (_array.size() == 0 || _list.size() == 0)
+        throw std::runtime_error("Error: Cannot sort empty containers");
 
     {
         std::cout << "Before:  ";

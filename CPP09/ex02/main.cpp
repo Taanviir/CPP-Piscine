@@ -56,7 +56,13 @@ int main(int argc, char **argv) {
         }
     }
 
-    pmergeMe.sort();
+    try {
+        pmergeMe.sort();
+    } catch (std::exception& error) {
+        std::cout << error.what() << std::endl;
+        delete [] array;
+        return 1;
+    }
 
     delete [] array;
     return 0;
