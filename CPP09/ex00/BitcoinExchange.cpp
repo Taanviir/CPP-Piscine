@@ -36,13 +36,17 @@ BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const& copy) {
 
 double BitcoinExchange::convertAmount(const std::string& date, double amount) {
     double closestRate = 0;
-    for (std::map<std::string, double>::iterator mapItr = _exchangeRates.begin();
-        mapItr != _exchangeRates.end(); mapItr++)
-    {
-        if ((*mapItr).first.compare(date) <= 0)
-            closestRate = (*mapItr).second;
-        else
-            break;
+    std::map<std::string, double>::iterator mapItr = _exchangeRates.lower_bound(date);
+    if (mapItr == _exchangeRates.end()) {
+        mapItr--;
+        closestRate = (*mapItr).second;
+    } else if (mapItr == _exchangeRates.begin()) {
+        std::cerr << "Error: cannot find any closer data" << std::endl;
+        return 0;
+    } else {
+        if ((*mapItr).first != date)
+            mapItr--;
+        closestRate = (*mapItr).second;
     }
     return closestRate * amount;
 }
